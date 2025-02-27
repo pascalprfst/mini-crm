@@ -11,16 +11,7 @@ use Livewire\Component;
 
 class CustomerForm extends Component
 {
-    #[Validate('required|string')]
-    public string $name;
-
-    #[Validate('required|email')]
-    public string $email;
-
     public array $customFields = [];
-
-    public Customer $customer;
-    public CustomFieldValues $customerValues;
 
     public function mount() : void
     {
@@ -35,28 +26,10 @@ class CustomerForm extends Component
                 'value' => '',
             ];
         }
-
-        $this->customer = Customer::find(1);
-
-        $this->customerValues = CustomFieldValues::where('customer_id', $this->customer->id)->get();
     }
 
-    public function submitCustomer() : void
+    public function deleteCustomField(CustomField $field) : void
     {
-        $customer = Customer::create([
-            'name' => $this->name,
-            'email' => $this->email,
-        ]);
-
-        foreach ($this->customFields as $customField) {
-            CustomFieldValues::create([
-                'customer_id' => $customer->id,
-                'custom_field_id' => $customField['id'],
-                'str_value' => $customField['type'] === 'string' ? $customField['value']  : '',
-                'txt_value' => $customField['type'] === 'text' ? $customField['value'] : '',
-                'int_value' => $customField['type'] === 'number' ? $customField['value'] : '',
-            ]);
-        }
     }
 
     public function render() : View
