@@ -10,15 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('custom_fields', function (Blueprint $table) {
+        Schema::create('form_templates', function (Blueprint $table) {
             $table->id();
             $table->string('model');
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->enum('type', ['string', 'text', 'date', 'email']);
-            $table->boolean('required')->default(false);
-            $table->integer('order')->default(0);
-            $table->boolean('disabled')->default(false);
+            $table->integer('grid_columns')->default(3);
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('custom_fields');
+        Schema::dropIfExists('form_templates');
     }
 };

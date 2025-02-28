@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         Customer::create();
 
         CustomField::create([
+            'model' => 'CUSTOMER',
             'name' => 'Name',
             'slug' => 'name',
             'type' => 'text',
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         CustomField::create([
+            'model' => 'CUSTOMER',
             'name' => 'E-Mail',
             'slug' => 'email',
             'type' => 'text',
@@ -40,6 +42,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         CustomField::create([
+            'model' => 'CUSTOMER',
             'name' => 'Straße',
             'slug' => 'strasse',
             'type' => 'text',
@@ -48,6 +51,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         CustomField::create([
+            'model' => 'CUSTOMER',
             'name' => 'Postleitzahl',
             'slug' => 'postleitzahl',
             'type' => 'text',
@@ -56,6 +60,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         CustomField::create([
+            'model' => 'CUSTOMER',
             'name' => 'Stadt',
             'slug' => 'stadt',
             'type' => 'text',

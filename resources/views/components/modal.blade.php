@@ -1,8 +1,8 @@
 @props(['aside' => false, 'name' => '', ])
 
 <div x-cloak x-show="show"
-     x-data="{ show: false, name: '{{ $name }}' , content: '' }"
-     x-on:open-modal.window="if ($event.detail.name === name) { show = true; content = $event.detail.content }"
+     x-data="{ show: false, name: '{{ $name }}' , data: '' }"
+     x-on:open-modal.window="if ($event.detail.name === name) { show = true; data = $event.detail.data }"
      x-on:close-modal.window="show = false"
      class="fixed inset-0 z-40 w-full flex justify-center items-center
      ">

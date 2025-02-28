@@ -2,18 +2,19 @@
 
 namespace App\Livewire;
 
-use App\Models\Customer;
+use App\Classes\FieldTypes;
 use App\Models\CustomField;
-use App\Models\CustomFieldValues;
 use Illuminate\View\View;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class CustomerForm extends Component
 {
     public array $customFields = [];
+    public array $fieldTypes = [];
 
-    public function mount() : void
+    public bool $checked = false;
+
+    public function mount(): void
     {
         $customFields = CustomField::all();
         foreach ($customFields as $customField) {
@@ -26,13 +27,25 @@ class CustomerForm extends Component
                 'value' => '',
             ];
         }
+
+        $this->fieldTypes = FieldTypes::getFieldTypes();
     }
 
-    public function deleteCustomField(CustomField $field) : void
+    public function addCustomField(array $formData): void
+    {
+
+    }
+
+    public function deactivateCustomField(CustomField $field): void
     {
     }
 
-    public function render() : View
+    public function test()
+    {
+        dd("Test");
+    }
+
+    public function render(): View
     {
         return view('livewire.customer-form');
     }
