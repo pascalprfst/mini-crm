@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->boolean('required')->default(false);
             $table->integer('order')->default(0);
             $table->boolean('disabled')->default(false);
+            $table->boolean('hidden')->default(false);
             $table->timestamps();
         });
     }
