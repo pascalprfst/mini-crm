@@ -67,7 +67,6 @@
                 open: false,
                 columns: 3,
                 fields: @js($customFields),
-
             }))
         })
     </script>
