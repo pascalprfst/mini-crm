@@ -10,6 +10,13 @@ class Export extends Component
 {
     public string $model = '';
 
+    public function export(array $data): void
+    {
+        // Validieren
+        // csv/excel
+        // Actions erstellen
+    }
+
     public function render(): View
     {
         $fields = CustomField::where('model', $this->model)->get();
