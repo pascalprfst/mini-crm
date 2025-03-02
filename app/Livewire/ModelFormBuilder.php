@@ -41,7 +41,7 @@ class ModelFormBuilder extends Component
         // Type validieren
         // Error zurück geben
 
-        /*
+
         $orderCount = CustomField::where('model', 'CUSTOMER')->count();
 
         CustomField::create([
@@ -51,7 +51,7 @@ class ModelFormBuilder extends Component
             'type' => $data['type'],
             'required' => $data['required'],
             'order' => $orderCount + 1,
-        ]);*/
+        ]);
 
         session()->flash('success', "Feld erfolgreich angelegt!");
         $this->redirect(route('dashboard'));
