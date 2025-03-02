@@ -14,6 +14,23 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+
+            animation: {
+                slideIn: 'slideIn 5s ease-in-out forwards',
+                widthExpand: 'widthExpand 4750ms ease-in-out forwards',
+            },
+            keyframes: {
+                slideIn: {
+                    '0%': {transform: 'translate(-50%,-100%)'},
+                    '10%': {transform: 'translate(-50%, 24px)'},
+                    '90%': {transform: 'translate(-50%, 24px)'},
+                    '100%': {transform: 'translate(-50%,-100%)'},
+                },
+                widthExpand: {
+                    '0%': {width: '0%'},
+                    '100%': {width: '100%'},
+                },
+            }
         },
     },
 

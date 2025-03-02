@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class ModelFormBuilder extends Component
 {
-    public string $model = '';
+    public string $model = 'CUSTOMER';
 
     public array $customFields = [];
     public array $fieldTypes = [];
@@ -19,7 +19,8 @@ class ModelFormBuilder extends Component
 
     public function mount(): void
     {
-        $customFields = CustomField::all();
+        $customFields = CustomField::where('model', 'CUSTOMER')->get();
+
         foreach ($customFields as $customField) {
             $this->customFields[] = [
                 'id' => $customField->id,
@@ -47,12 +48,15 @@ class ModelFormBuilder extends Component
     {
         if ($data['template']) {
             FormTemplate::updateOrCreate([
-                'model' => 'CUSTOMER',
+                'model' => $this->model,
             ], [
                 'grid_columns' => $data['template']['grid_columns'],
 
             ]);
         }
+
+        session()->flash('success', "Vorlage erfolgreich gespeichert!");
+        $this->redirect(route('dashboard'));
     }
 
     public function render(): View

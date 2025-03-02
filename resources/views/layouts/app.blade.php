@@ -16,6 +16,7 @@
     @livewireStyles
 </head>
 <body class="font-sans antialiased">
+<x-toast/>
 <div class="min-h-screen bg-slate-100">
     @include('layouts.navigation')
 
