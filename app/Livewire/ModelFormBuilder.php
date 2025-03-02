@@ -16,7 +16,7 @@ class ModelFormBuilder extends Component
     public array $customFields = [];
     public array $fieldTypes = [];
     public string $error = '';
-    public int $columns = 1;
+    public int $columns = 2;
 
     public function mount(): void
     {
@@ -26,7 +26,11 @@ class ModelFormBuilder extends Component
     public function updatedModel(): void
     {
         $customFields = CustomField::where('model', $this->model)->get();
-        $this->columns = FormTemplate::where('model', $this->model)->first()->value('grid_columns') ?? 2;
+        $template = FormTemplate::where('model', $this->model)->first();
+
+        if ($template) {
+            $this->columns = $template->grid_columns ?? 2;
+        }
 
         $this->customFields = [];
 
