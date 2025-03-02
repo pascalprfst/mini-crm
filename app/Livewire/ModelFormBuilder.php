@@ -26,7 +26,7 @@ class ModelFormBuilder extends Component
     public function updatedModel(): void
     {
         $customFields = CustomField::where('model', $this->model)->get();
-        $this->columns = FormTemplate::where('model', $this->model)->value('grid_columns');
+        $this->columns = FormTemplate::where('model', $this->model)->value('grid_columns')->first() ?? 2;
 
         $this->customFields = [];
 
