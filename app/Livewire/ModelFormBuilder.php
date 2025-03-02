@@ -25,36 +25,29 @@ class ModelFormBuilder extends Component
 
     public function updatedModel(): void
     {
-        $customFields = CustomField::where('model', $this->model)->get();
         $template = FormTemplate::where('model', $this->model)->first();
 
         if ($template) {
             $this->columns = $template->grid_columns ?? 2;
         }
 
-        $this->customFields = [];
+        $this->getFields();
 
-        foreach ($customFields as $customField) {
-            $this->customFields[] = [
-                'id' => $customField->id,
-                'name' => $customField->name,
-                'slug' => $customField->slug,
-                'type' => $customField->type,
-                'order' => $customField->order,
-                'value' => '',
-            ];
-        }
     }
 
     public function addFormField(array $data): void
     {
         if (strlen($data['name']) === 0) {
             $this->error = 'Das Feld braucht einen Namen.';
+            return;
         }
 
         $types = ['text', 'date', 'url', 'email', 'longtext'];
-        // Type validieren
-        // Error zurück geben
+
+        if (!in_array($data['type'], $types)) {
+            $this->error = 'Dieser Feldtyp existiert nicht.';
+            return;
+        }
 
         $orderCount = CustomField::where('model', 'CUSTOMER')->count();
 
@@ -67,12 +60,30 @@ class ModelFormBuilder extends Component
             'order' => $orderCount + 1,
         ]);
 
-        session()->flash('success', "Feld erfolgreich angelegt!");
-        $this->redirect(route('dashboard'));
+        $this->getFields();
+        $this->dispatch('close-modal', name: 'addCustomField');
     }
 
     public function deactivateCustomField(CustomField $field): void
     {
+    }
+
+    public function getFields(): void
+    {
+        $this->customFields = [];
+
+        $customFields = CustomField::where('model', $this->model)->get();
+
+        foreach ($customFields as $customField) {
+            $this->customFields[] = [
+                'id' => $customField->id,
+                'name' => $customField->name,
+                'required' => $customField->required,
+                'type' => $customField->type,
+                'order' => $customField->order,
+                'value' => '',
+            ];
+        }
     }
 
     public function saveSettings(array $data): void
@@ -85,9 +96,6 @@ class ModelFormBuilder extends Component
 
             ]);
         }
-
-        session()->flash('success', "Vorlage erfolgreich gespeichert!");
-        $this->redirect(route('dashboard'));
     }
 
     public function render(): View

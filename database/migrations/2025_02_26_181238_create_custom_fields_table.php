@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('model');
             $table->string('name');
-            $table->string('slug')->unique();
-            $table->enum('type', ['text', 'date', 'email', 'url', 'longtext']);
+            $table->string('slug');
+            $table->enum('type', ['text', 'date', 'email', 'url', 'longtext', 'number', 'image']);
             $table->boolean('required')->default(false);
             $table->integer('order')->default(0);
             $table->boolean('disabled')->default(false);

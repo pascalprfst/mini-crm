@@ -1,9 +1,10 @@
 @props(['field'])
 
 @php
-    $standardTypes = ['text', 'email', 'tel', 'url' ,'date'];
+    $standardTypes = ['text', 'email', 'tel', 'url' ,'date' , 'number'];
 @endphp
 
+    <!-- Basic Fields -->
 @if(in_array($field['type'], $standardTypes))
     <div>
         <label for="{{$field['slug']}}" class="text-sm font-medium text-slate-600">
@@ -27,4 +28,20 @@
         </div>
     </div>
 @endif
+
+<!-- Textare -->
+@if($field['type'] === 'longtext')
+    <div>
+
+    </div>
+@endif
+
+<!-- Image -->
+@if($field['type'] === 'image')
+    <div>
+
+    </div>
+@endif
+
+
 

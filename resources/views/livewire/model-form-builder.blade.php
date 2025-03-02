@@ -1,4 +1,4 @@
-<div x-data="formBuilder" x-cloak>
+<div x-data="formBuilder($wire)" x-cloak>
     @include('models.add-field')
     @include('models.edit-field')
 
@@ -60,18 +60,26 @@
                     <template x-for="field in fields">
                         <li>
                             <div x-sort:item
-                                 class="cursor-grab bg-gray-100 p-1.5 rounded-md border-2 border-dotted border-gray-300 relative">
+                                 class="cursor-grab bg-slate-100 p-1.5 rounded-md border-2 border-dotted border-slate-300 relative">
                                 <div class="absolute right-2.5 top-2 flex items-center gap-x-2">
+                                    <i x-show="field.required"
+                                       class="fa-solid fa-triangle-exclamation text-slate-800 font-bold"></i>
                                     <i @click="$dispatch('open-modal', {name: 'editCustomField',  data: '12345' })"
                                        class="fa-solid fa-pencil text-slate-800 cursor-pointer"></i>
                                     <i @click="deactivateField(field.id)"
                                        class="fa-solid fa-ban text-red-500 cursor-pointer"></i>
+                                    <i class="fa-solid fa-trash-can text-red-500 cursor-pointer"></i>
                                 </div>
                                 <div>
-                                    <label x-text="field.name" x-bind:for="field.slug"
-                                           class="text-sm text-gray-500"></label><br>
-                                    <input disabled x-bind:name="field.slug" x-bind:id="field.slug"
-                                           class="w-full border-gray-300 rounded-md"/>
+                                    <div class="text-sm text-slate-500">
+                                        <span class="font-bold">Name:</span> <span x-text="field.name"></span>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-slate-500">
+                                    <span class="font-bold">Feldtyp:</span> <span x-text="field.type"></span>
+                                </div>
+                                <div class="text-sm text-slate-500">
+                                    <span class="font-bold">Status:</span> <span>Aktiv</span>
                                 </div>
                             </div>
                         </li>
@@ -88,10 +96,10 @@
 
     <script>
         document.addEventListener('alpine:init', () => {
-            Alpine.data('formBuilder', () => ({
+            Alpine.data('formBuilder', ($wire) => ({
                 open: false,
-                columns: @entangle('columns'),
-                fields: @entangle('customFields'),
+                columns: $wire.entangle('columns'),
+                fields: $wire.entangle('customFields'),
 
                 saveSettings() {
                     const data = {
@@ -99,10 +107,8 @@
                             grid_columns: this.columns
                         }
                     }
-
-                    this.$wire.saveSettings(data);
+                    $wire.saveSettings(data);
                 },
-
             }))
         })
     </script>
