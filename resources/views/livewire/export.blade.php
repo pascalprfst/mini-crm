@@ -29,21 +29,22 @@
         @if(count($fields) > 0)
             <form id="exportForm" @submit.prevent="requestExport" class="flex gap-x-8 mt-3">
                 <div class="w-1/3 ">
-                    <label for="filename" class="text-sm font-medium text-slate-600">Dateiname</label>
+                    <label for="filename" class="text-sm font-medium text-slate-600">Dateiname<span
+                            class="text-red-500">*</span></label>
                     <input x-model="filename" type="text" id="filename" name="filename"
+                           :class="!validateFilename(filename) ? 'focus:ring-red-400 focus:border-red-400' : ''"
                            class="w-full border-slate-300 px-2 py-1.5 rounded-md cursor-pointer text-slate-500"/>
-                    <span x-show="nameError" x-text="nameError" class="mt-2 text-red-500 text-sm"></span>
                 </div>
 
                 <div>
                     <span class="text-slate-600 text-sm font-medium">Format</span>
                     <div class="flex gap-x-2.5">
                         <label for="csv" class="block text-sm text-slate-600">
-                            <input x-model="type" id="csv" name="type" value="csv" type="radio"/>
+                            <input x-model="type" id="csv" name="csv" value="csv" type="radio"/>
                             <span class="relative top-0.5">CSV</span>
                         </label>
                         <label for="excel" class="block text-sm text-slate-600">
-                            <input x-model="type" id="excel" name="type" value="excel" type="radio"/>
+                            <input x-model="type" id="excel" name="excel" value="excel" type="radio"/>
                             <span class="relative top-0.5">Excel</span>
                         </label>
                     </div>
@@ -73,17 +74,25 @@
             </div>
 
             <div class="w-full p-3 bg-slate-100 rounded-md flex gap-x-3">
-                <ul x-sort x-sort:group="fields" class="flex gap-3">
+                <div class="w-full min-h-20 border-2 border-dotted border-slate-300 rounded-md relative">
+                    <ul x-sort x-sort:group="fields" class="flex gap-3">
 
-                </ul>
-                <div
-                    class="w-full min-h-20 grid place-content-center border-2 border-dotted border-slate-300 rounded-md">
-                    <em class="text-slate-400">Felder hier ablegen</em>
+                    </ul>
+                    <em class="text-slate-400 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">Felder heir
+                        ablegen</em>
                 </div>
             </div>
 
             <div class="mt-6">
-                <x-primary-button form="exportForm">Exportieren</x-primary-button>
+                <x-primary-button x-bind:disabled="filename.length === 0 || !validateFilename(filename)"
+                                  form="exportForm">Exportieren
+                </x-primary-button>
+                <span x-show="error" x-text="error" class="ml-2 mt-2 text-red-500 text-sm"></span>
+                @if($error)
+                    <span class="ml-2 mt-2 text-red-500 text-sm">
+                        {{$error}}
+                    </span>
+                @endif
             </div>
         @else
             <div class="py-6 text-slate-400 flex justify-center">
@@ -97,29 +106,27 @@
                 type: 'csv',
                 withHeader: false,
                 filename: '',
-                nameError: '',
+                sorting: [],
                 error: '',
 
                 requestExport() {
                     if (!this.validateFilename(this.filename)) {
-                        this.nameError = 'Der Dateiname ist nicht erlaubt.'
+                        this.error = 'Der Dateiname ist nicht erlaubt.'
                         return;
                     }
 
-                    if (this.type !== 'csv' || this.type !== 'excel') {
+                    if (this.type !== 'csv' && this.type !== 'excel') {
                         this.error = 'Es wurde kein valider Dateityp ausgewählt.';
                         return
                     }
 
-                    // Globaler Error ausgeben neben Button
-
                     this.error = '';
-                    this.nameError = '';
 
                     const data = {
                         type: this.type,
                         header: this.withHeader,
-                        filename: this.filename
+                        filename: this.filename,
+                        soring: this.sorting,
                     };
 
                     this.$wire.export(data);

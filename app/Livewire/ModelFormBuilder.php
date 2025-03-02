@@ -4,11 +4,14 @@ namespace App\Livewire;
 
 use App\Classes\FieldTypes;
 use App\Models\CustomField;
+use App\Models\FormTemplate;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class CustomerForm extends Component
+class ModelFormBuilder extends Component
 {
+    public string $model = '';
+
     public array $customFields = [];
     public array $fieldTypes = [];
 
@@ -40,13 +43,20 @@ class CustomerForm extends Component
     {
     }
 
-    public function test()
+    public function saveSettings(array $data): void
     {
-        dd("Test");
+        if ($data['template']) {
+            FormTemplate::updateOrCreate([
+                'model' => 'CUSTOMER',
+            ], [
+                'grid_columns' => $data['template']['grid_columns'],
+
+            ]);
+        }
     }
 
     public function render(): View
     {
-        return view('livewire.customer-form');
+        return view('livewire.model-form-builder');
     }
 }

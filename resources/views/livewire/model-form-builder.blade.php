@@ -4,10 +4,22 @@
 
     <div x-data="formBuilder" x-cloak>
         <div class="pb-2 flex justify-between mb-2">
-            <h2 class="font-bold text-slate-800">Formular Builder</h2>
+            <h2 class="font-bold text-slate-800">Formular & Objekt Builder</h2>
         </div>
 
-        <form class="space-y-4">
+        <div class="w-1/2 mb-6">
+            <label for="model" class="text-sm font-medium text-slate-600">Objekt</label>
+            <div>
+                <select id="model" name="model" wire:model.live="model"
+                        class="w-full border-slate-300 px-2 py-1.5 rounded-md cursor-pointer">
+                    <option disabled selected value="">Objekt auswählen</option>
+                    <option value="CUSTOMER">Kunden</option>
+                    <option value="CONTACTS">Kontakte</option>
+                </select>
+            </div>
+        </div>
+
+        <form @submit.prevent="saveSettings()" class="space-y-4">
             <div class="flex items-end">
                 <div class="flex items-end gap-x-4">
                     <div>
@@ -34,6 +46,10 @@
                         <i class="fa-solid fa-plus text-lg font-medium mr-1.5"></i>
                         Neues Feld hinzufügen
                     </div>
+
+                </div>
+                <div class="ml-auto">
+                    <x-primary-button>Vorlage speichern</x-primary-button>
                 </div>
             </div>
 
@@ -65,8 +81,18 @@
         document.addEventListener('alpine:init', () => {
             Alpine.data('formBuilder', () => ({
                 open: false,
-                columns: 3,
+                columns: 2,
                 fields: @js($customFields),
+
+                saveSettings() {
+                    const data = {
+                        template: {
+                            grid_columns: this.columns
+                        }
+                    }
+
+                    this.$wire.saveSettings(data);
+                }
             }))
         })
     </script>

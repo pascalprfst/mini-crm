@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
-use App\Models\CustomField;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,6 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::get('import-export', function () {
         return view('import-export');
     })->name('import-export');
+
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
