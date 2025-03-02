@@ -15,7 +15,7 @@ class ModelFormBuilder extends Component
 
     public array $customFields = [];
     public array $fieldTypes = [];
-    public array $errors = [];
+    public string $error = '';
     public int $columns = 1;
 
     public function mount(): void
@@ -26,7 +26,7 @@ class ModelFormBuilder extends Component
     public function updatedModel(): void
     {
         $customFields = CustomField::where('model', $this->model)->get();
-        $this->columns = FormTemplate::where('model', $this->model)->value('grid_columns')->first() ?? 2;
+        $this->columns = FormTemplate::where('model', $this->model)->first()->value('grid_columns') ?? 2;
 
         $this->customFields = [];
 
@@ -44,7 +44,11 @@ class ModelFormBuilder extends Component
 
     public function addFormField(array $data): void
     {
-        // Name validieren
+        if (strlen($data['name']) === 0) {
+            $this->error = 'Das Feld braucht einen Namen.';
+        }
+
+        $types = ['text', 'date', 'url', 'email', 'longtext'];
         // Type validieren
         // Error zurück geben
 
