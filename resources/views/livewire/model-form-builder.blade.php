@@ -1,8 +1,8 @@
-<div>
+<div x-data="formBuilder" x-cloak>
     @include('models.add-field')
     @include('models.edit-field')
 
-    <div x-data="formBuilder" x-cloak>
+    <div>
         <div class="pb-2 flex justify-between mb-2">
             <h2 class="font-bold text-slate-800">Formular & Objekt Builder</h2>
         </div>
@@ -92,7 +92,8 @@
                     }
 
                     this.$wire.saveSettings(data);
-                }
+                },
+                
             }))
         })
     </script>

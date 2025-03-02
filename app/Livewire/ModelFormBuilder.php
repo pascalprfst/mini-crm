@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Classes\FieldTypes;
 use App\Models\CustomField;
 use App\Models\FormTemplate;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -14,8 +15,7 @@ class ModelFormBuilder extends Component
 
     public array $customFields = [];
     public array $fieldTypes = [];
-
-    public bool $checked = false;
+    public string $error = '';
 
     public function mount(): void
     {
@@ -35,9 +35,26 @@ class ModelFormBuilder extends Component
         $this->fieldTypes = FieldTypes::getFieldTypes();
     }
 
-    public function addCustomField(array $formData): void
+    public function addFormField(array $data): void
     {
+        // Name validieren
+        // Type validieren
+        // Error zurück geben
 
+        /*
+        $orderCount = CustomField::where('model', 'CUSTOMER')->count();
+
+        CustomField::create([
+            'model' => 'CUSTOMER',
+            'name' => $data['name'],
+            'slug' => Str::slug($data['name']),
+            'type' => $data['type'],
+            'required' => $data['required'],
+            'order' => $orderCount + 1,
+        ]);*/
+
+        session()->flash('success', "Feld erfolgreich angelegt!");
+        $this->redirect(route('dashboard'));
     }
 
     public function deactivateCustomField(CustomField $field): void

@@ -8,7 +8,7 @@ class FieldTypes
     {
         return [
             [
-                'name' => 'Name',
+                'name' => 'Text',
                 'type' => 'text',
             ],
             [
