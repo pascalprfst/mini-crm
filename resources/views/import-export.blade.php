@@ -8,13 +8,14 @@
     <div x-data="{section: 'import'}" x-cloak>
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
-            <button @click="section = 'import'" class="mr-4">
-                <i class="fa-solid fa-cloud-arrow-up text-lg text-slate-800 mr-0.5"></i>
+            <button @click="section = 'import'" :class="section === 'import' ? 'text-blue-600' : 'text-slate-800'"
+                    class="mr-4">
+                <i class="fa-solid fa-cloud-arrow-up text-lg mr-0.5"></i>
                 Import
             </button>
 
-            <button class="text-slate-800 font-medium" @click="section = 'export'">
-                <i class="fa-solid fa-cloud-arrow-down text-lg text-slate-800 mr-0.5"></i>
+            <button :class="section === 'export' ? 'text-blue-600' : 'text-slate-800'" @click="section = 'export'">
+                <i class="fa-solid fa-cloud-arrow-down text-lg mr-0.5"></i>
                 Export
             </button>
         </div>

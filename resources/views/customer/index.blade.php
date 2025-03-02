@@ -14,7 +14,8 @@
                     @if(count($formFields) > 0)
                         <form method="POST" class="mt-6">
                             @csrf
-                            <div class="grid grid-cols-{{$formTemplate->grid_columns ?? '2'}} gap-x-5 gap-y-3 w-full">
+                            <div class="grid gap-x-5 gap-y-3 w-full"
+                                 style="grid-template-columns: repeat({{$formTemplate->grid_columns}}, 1fr)">
                                 @foreach($formFields as $field)
                                     <x-forms.form-fields :field="$field"/>
                                 @endforeach

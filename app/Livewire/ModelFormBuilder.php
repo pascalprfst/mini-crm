@@ -11,15 +11,24 @@ use Livewire\Component;
 
 class ModelFormBuilder extends Component
 {
-    public string $model = 'CUSTOMER';
+    public string $model = '';
 
     public array $customFields = [];
     public array $fieldTypes = [];
-    public string $error = '';
+    public array $errors = [];
+    public int $columns = 1;
 
     public function mount(): void
     {
-        $customFields = CustomField::where('model', 'CUSTOMER')->get();
+        $this->fieldTypes = FieldTypes::getFieldTypes();
+    }
+
+    public function updatedModel(): void
+    {
+        $customFields = CustomField::where('model', $this->model)->get();
+        $this->columns = FormTemplate::where('model', $this->model)->value('grid_columns');
+
+        $this->customFields = [];
 
         foreach ($customFields as $customField) {
             $this->customFields[] = [
@@ -31,8 +40,6 @@ class ModelFormBuilder extends Component
                 'value' => '',
             ];
         }
-
-        $this->fieldTypes = FieldTypes::getFieldTypes();
     }
 
     public function addFormField(array $data): void
@@ -40,7 +47,6 @@ class ModelFormBuilder extends Component
         // Name validieren
         // Type validieren
         // Error zurück geben
-
 
         $orderCount = CustomField::where('model', 'CUSTOMER')->count();
 
