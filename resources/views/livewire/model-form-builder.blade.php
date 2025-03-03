@@ -10,7 +10,7 @@
         <div class="w-1/2 mb-6">
             <label for="model" class="text-sm font-medium text-slate-600">Objekt</label>
             <div>
-                <select id="model" name="model" wire:model.live="model"
+                <select id="model" name="model" wire:model.live="model" @change="error = ''"
                         class="w-full border-slate-300 px-2 py-1.5 rounded-md cursor-pointer">
                     <option disabled selected value="">Objekt auswählen</option>
                     <option value="CUSTOMER">Kunden</option>
@@ -27,15 +27,15 @@
                             <span class="text-slate-800 text-sm">Anordnung</span>
 
                             <div class="bg-slate-100 flex border border-slate-300 max-w-fit rounded-md">
-                                <div @click="columns = 1"
+                                <div @click="changeColumns(1)"
                                      class="grid place-content-center px-4 py-0.5 rounded-l-md font-medium cursor-pointer hover:bg-slate-200">
                                     |
                                 </div>
-                                <div @click="columns = 2"
+                                <div @click="changeColumns(2)"
                                      class="grid place-content-center px-4 py-0.5 font-medium border-x border-slate-300 cursor-pointer hover:bg-slate-200">
                                     ||
                                 </div>
-                                <div @click="columns = 3"
+                                <div @click="changeColumns(3)"
                                      class="grid place-content-center px-4 py-0.5 rounded-r-md font-medium cursor-pointer hover:bg-slate-200">
                                     |||
                                 </div>
@@ -47,6 +47,10 @@
                             <i class="fa-solid fa-plus text-lg font-medium mr-1.5"></i>
                             Neues Feld hinzufügen
                         </div>
+
+                        <template x-if="error">
+                            <div class="text-red-500 text-sm py-1.5" x-text="error"></div>
+                        </template>
 
                     </div>
                     <div class="ml-auto">
@@ -100,8 +104,22 @@
                 open: false,
                 columns: $wire.entangle('columns'),
                 fields: $wire.entangle('customFields'),
+                error: '',
+
+                changeColumns(columns) {
+                    if (![1, 2, 3].includes(this.columns)) {
+                        return;
+                    }
+
+                    this.columns = columns;
+                },
 
                 saveSettings() {
+                    if (![1, 2, 3].includes(this.columns)) {
+                        this.error = "Diese Spaltenanzahl ist nicht erlaubt."
+                        return;
+                    }
+
                     const data = {
                         template: {
                             grid_columns: this.columns

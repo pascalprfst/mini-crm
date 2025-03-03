@@ -12,19 +12,8 @@
                     <h2 class="font-bold text-slate-800">Neuen Kunden anlegen</h2>
 
                     @if(count($formFields) > 0)
-                        <form method="POST" method="{{route('customers.store')}}" class="mt-6">
-                            @csrf
-                            <div class="grid gap-x-5 gap-y-3 w-full"
-                                 style="grid-template-columns: repeat({{$formTemplate->grid_columns ?? 2}}, 1fr)">
-                                @foreach($formFields as $field)
-                                    <x-forms.form-fields :field="$field"/>
-                                @endforeach
-                            </div>
-
-                            <div class="mt-6">
-                                <x-primary-button>Kunden anlegen</x-primary-button>
-                            </div>
-                        </form>
+                        <x-forms.form-template action="{{route('customers.store')}}" :template="$formTemplate"
+                                               :fields="$formFields" model="Kunden"/>
                     @endif
                 </div>
             </div>

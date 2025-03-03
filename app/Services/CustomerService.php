@@ -9,7 +9,6 @@ class CustomerService
 {
     public function create($data): void
     {
-
         $customer = Customer::create();
 
         $filteredArray = array_filter($data, function ($value) {

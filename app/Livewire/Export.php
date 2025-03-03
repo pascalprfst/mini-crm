@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\CustomerValue;
 use App\Models\CustomField;
 use Illuminate\View\View;
 use Livewire\Component;

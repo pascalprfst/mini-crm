@@ -6,6 +6,7 @@ use App\Classes\FieldTypes;
 use App\Models\CustomerValue;
 use App\Models\CustomField;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class StoreCustomerRequest extends FormRequest
 {
@@ -30,7 +31,7 @@ class StoreCustomerRequest extends FormRequest
         $data = [];
         foreach ($customFields as $field) {
             $validationRules = '';
-
+            Log::info($field['type']);
             foreach ($fieldTypes as $type) {
                 if ($field['type'] === $type['type']) {
                     $validationRules = $type['validationRules'];
