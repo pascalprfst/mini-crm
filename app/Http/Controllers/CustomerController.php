@@ -13,7 +13,7 @@ class CustomerController extends Controller
 {
     public function create(): View
     {
-        return view('customer.index', [
+        return view('customer.create', [
             'formFields' => CustomField::where('model', 'CUSTOMER')->get(),
             'formTemplate' => FormTemplate::where('model', 'CUSTOMER')->first(),
         ]);
@@ -23,6 +23,6 @@ class CustomerController extends Controller
     {
         $service->create($request->validated());
 
-        return redirect()->route('customer.index')->with('success', 'Kunde erfolgreich angelegt.');
+        return redirect()->route('customers.create')->with('success', 'Kunde erfolgreich angelegt.');
     }
 }

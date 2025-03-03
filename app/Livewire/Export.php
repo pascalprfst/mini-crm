@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\CustomField;
+use App\Models\CustomerValue;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -36,7 +36,7 @@ class Export extends Component
 
     public function render(): View
     {
-        $fields = CustomField::where('model', $this->model)->get();
+        $fields = CustomerValue::where('model', $this->model)->get();
 
         return view('livewire.export', [
             'fields' => $fields,

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Classes\FieldTypes;
+use App\Models\CustomerValue;
 use App\Models\CustomField;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -35,9 +36,8 @@ class StoreCustomerRequest extends FormRequest
                     $validationRules = $type['validationRules'];
                 }
             }
-            $data[$field['slug']] = $validationRules;
+            $data[$field['slug']] = $validationRules .= $field['required'] ? '|required' : '|nullable';
         }
-        
         return $data;
     }
 }

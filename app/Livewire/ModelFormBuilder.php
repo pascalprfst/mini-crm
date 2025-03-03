@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Classes\FieldTypes;
+use App\Models\CustomerValue;
 use App\Models\CustomField;
 use App\Models\FormTemplate;
 use Illuminate\Support\Str;
@@ -64,7 +65,7 @@ class ModelFormBuilder extends Component
         $this->dispatch('close-modal', name: 'addCustomField');
     }
 
-    public function deactivateCustomField(CustomField $field): void
+    public function deactivateCustomField(CustomerValue $field): void
     {
     }
 

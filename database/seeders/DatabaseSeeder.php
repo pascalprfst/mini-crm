@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Customer;
+use App\Models\CustomerValue;
 use App\Models\CustomField;
 use App\Models\User;
 
@@ -21,15 +22,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'pascal@bundesweit.digital',
             'password' => bcrypt('password'),
         ]);
-
-        Customer::create();
-
+        
         CustomField::create([
             'model' => 'CUSTOMER',
             'name' => 'Name',
             'slug' => 'name',
             'type' => 'text',
-            'required' => false,
+            'required' => true,
             'order' => 1,
         ]);
 
@@ -37,8 +36,8 @@ class DatabaseSeeder extends Seeder
             'model' => 'CUSTOMER',
             'name' => 'E-Mail',
             'slug' => 'email',
-            'type' => 'text',
-            'required' => false,
+            'type' => 'email',
+            'required' => true,
             'order' => 2,
         ]);
 
@@ -47,7 +46,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Straße',
             'slug' => 'strasse',
             'type' => 'text',
-            'required' => false,
+            'required' => true,
             'order' => 3,
         ]);
 
@@ -56,7 +55,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Postleitzahl',
             'slug' => 'postleitzahl',
             'type' => 'text',
-            'required' => false,
+            'required' => true,
             'order' => 4,
         ]);
 
@@ -65,7 +64,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Stadt',
             'slug' => 'stadt',
             'type' => 'text',
-            'required' => false,
+            'required' => true,
             'order' => 5,
         ]);
 
