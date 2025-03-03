@@ -14,7 +14,8 @@
             @endif
         </label>
         <div>
-            <input type="{{$field['type']}}" id="{{$field['slug']}}" name="{{$field['slug']}}"
+            <input type="{{$field['type']}}" id="{{$field['slug']}}" value="{{old($field['slug'])}}"
+                   name="{{$field['slug']}}"
                    {{$attributes}} class="w-full border-slate-300 px-2 py-1.5 rounded-md cursor-pointer"/>
         </div>
         <div>

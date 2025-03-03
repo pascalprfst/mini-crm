@@ -18,7 +18,8 @@ Route::middleware('auth')->group(function () {
         return view('import-export');
     })->name('import-export');
 
-    Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
+    Route::get('/customers', [CustomerController::class, 'create'])->name('customers.create');
+    Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

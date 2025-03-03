@@ -12,7 +12,7 @@
                     <h2 class="font-bold text-slate-800">Neuen Kunden anlegen</h2>
 
                     @if(count($formFields) > 0)
-                        <form method="POST" class="mt-6">
+                        <form method="POST" method="{{route('customers.store')}}" class="mt-6">
                             @csrf
                             <div class="grid gap-x-5 gap-y-3 w-full"
                                  style="grid-template-columns: repeat({{$formTemplate->grid_columns}}, 1fr)">
