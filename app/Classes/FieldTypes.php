@@ -32,6 +32,11 @@ class FieldTypes
                 'type' => 'longtext',
                 'validationRules' => 'string|min:3'
             ],
+            [
+                'name' => 'Auswahl',
+                'type' => 'select',
+                'validationRules' => 'string|min:3'
+            ],
         ];
     }
 }

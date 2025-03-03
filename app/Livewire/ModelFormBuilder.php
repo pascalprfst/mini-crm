@@ -18,6 +18,7 @@ class ModelFormBuilder extends Component
     public array $fieldTypes = [];
     public string $error = '';
     public int $columns = 2;
+    public string $form = '';
 
     public function mount(): void
     {
@@ -34,6 +35,23 @@ class ModelFormBuilder extends Component
 
         $this->getFields();
 
+        $this->form = view('components.forms.basic-form', [
+            'fieldTypes' => $this->fieldTypes,
+        ]);
+
+    }
+
+    public function selectForm(string $type): void
+    {
+        if ($type === 'select') {
+            $this->form = view('components.forms.select-form', [
+                'fieldTypes' => $this->fieldTypes,
+            ]);
+        } else {
+            $this->form = view('components.forms.basic-form', [
+                'fieldTypes' => $this->fieldTypes,
+            ]);
+        }
     }
 
     public function addFormField(array $data): void
@@ -64,6 +82,7 @@ class ModelFormBuilder extends Component
         $this->getFields();
         $this->dispatch('close-modal', name: 'addCustomField');
     }
+
 
     public function deactivateCustomField(CustomerValue $field): void
     {
