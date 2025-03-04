@@ -18,6 +18,11 @@ return new class extends Migration {
             $table->enum('type', ['text', 'date', 'email', 'url', 'longtext', 'number', 'image']);
             $table->boolean('required')->default(false);
             $table->integer('order')->default(0);
+
+            $table->boolean('table_visability')->default(true);
+            $table->integer('table_order')->default(0);
+            $table->enum('table_column_sizes', ['S', 'M', 'L'])->default('small');
+
             $table->boolean('disabled')->default(false);
             $table->boolean('hidden')->default(false);
             $table->timestamps();

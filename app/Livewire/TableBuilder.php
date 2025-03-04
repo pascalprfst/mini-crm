@@ -14,6 +14,12 @@ class TableBuilder extends Component
     public function mount(): void
     {
         $this->getFields();
+
+        // Seeder für customFields anpassen
+        // Anhand der customFields die ersten 5 Werte Batches ziehen
+        // Anhand der customFields Tabelle generieren
+        // Erstmal fixe Tabellen Breiten
+        // Spalten größen dynamisch setzen
     }
 
     public function updatedModel(): void

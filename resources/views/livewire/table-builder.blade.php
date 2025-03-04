@@ -13,12 +13,22 @@
                 <option value="CONTACTS">Kontakte</option>
             </select>
         </div>
-
     </div>
+
+    <p class="text-slate-600 w-full p-2.5 border border-slate-300 rounded-md font-light mb-6">
+        <i class="fa-solid fa-circle-info text-slate-600"></i>
+        Ziehe mit dem <i class="fa-solid fa-compress text-main "></i> Icon die Spalten an die gewünschte Position. Über
+        <span class="border border-slate-300 rounded-sm text-sm px-2.5">S</span> <span
+            class="border border-slate-300 rounded-sm text-sm px-2.5">M</span> und
+        <span class="border border-slate-300 rounded-sm text-sm px-2.5">L</span> kannst du die
+        Spaltenbreite definieren. Mit einem Klick auf <i class="fa-solid fa-eye text-blue-600"></i> kannst du die Spalte
+        für diese
+        Tabelle ausblenden.
+    </p>
 
     <div>
         <h3 class="font-medum text-slate-600 my-4">Anordnung Spalten</h3>
-        <ul x-sort class="flex gap-x-2.5 overflow-x-auto">
+        <ul x-sort class="flex gap-x-2.5 -mx-6 px-6 overflow-x-auto">
             <template x-for="field in fields">
                 <li x-sort:item class="border border-slate-300 text-sm text-main px-2.5 py-1.5 rounded-sm bg-slate-100">
                     <div class="flex justify-between">
@@ -97,12 +107,13 @@
     </div>
     <div class="w-full h-12 bg-white"></div>
 
+    <div class="mt-2">
+        <x-primary-button>Tabelle speichern</x-primary-button>
+    </div>
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('tableBuilder', ($wire) => ({
                 fields: $wire.entangle('customFields'),
-
-                // Fields als Array erstellen disabled / small / medium / large / order
             }))
         })
     </script>
