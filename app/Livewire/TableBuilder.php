@@ -8,8 +8,13 @@ use Livewire\Component;
 
 class TableBuilder extends Component
 {
-    public string $model = '';
+    public string $model = 'CUSTOMER';
     public array $customFields = [];
+
+    public function mount(): void
+    {
+        $this->getFields();
+    }
 
     public function updatedModel(): void
     {
@@ -26,10 +31,7 @@ class TableBuilder extends Component
             $this->customFields[] = [
                 'id' => $customField->id,
                 'name' => $customField->name,
-                'required' => $customField->required,
-                'type' => $customField->type,
                 'order' => $customField->order,
-                'value' => '',
             ];
         }
     }
