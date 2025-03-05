@@ -65,9 +65,6 @@
             </tr>
             @foreach($customers as $customer)
                 <tr>
-                    @foreach($customer->getValues() as $value)
-                        <td class="px-2 py-1">{{$value}}</td>
-                    @endforeach
                 </tr>
             @endforeach
         </table>
