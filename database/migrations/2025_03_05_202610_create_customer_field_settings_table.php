@@ -14,6 +14,7 @@ return new class extends Migration {
         Schema::create('customer_field_settings', function (Blueprint $table) {
             $table->id();
             $table->string('field_name');
+            $table->integer('order')->default(0);
             $table->boolean('active')->default(true);
         });
 
@@ -23,9 +24,10 @@ return new class extends Migration {
             return !in_array($column, ['created_at', 'updated_at', 'deleted_at']);
         });
 
-        foreach ($filteredColumns as $column) {
+        foreach ($filteredColumns as $index => $column) {
             DB::table('customer_field_settings')->insert([
                 'field_name' => $column,
+                'order' => $index + 1,
             ]);
         }
     }
