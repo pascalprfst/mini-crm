@@ -21,7 +21,7 @@ return new class extends Migration {
 
             $table->boolean('table_visability')->default(true);
             $table->integer('table_order')->default(0);
-            $table->enum('table_column_sizes', ['S', 'M', 'L'])->default('small');
+            $table->enum('table_column_sizes', ['S', 'M', 'L'])->default('S');
 
             $table->boolean('disabled')->default(false);
             $table->boolean('hidden')->default(false);
