@@ -3,13 +3,9 @@
 namespace App\Livewire;
 
 use App\Classes\FieldTypes;
-use App\Models\CustomerFieldSetting;
-use App\Models\CustomerValue;
-use App\Models\CustomField;
 use App\Models\FormTemplate;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -88,9 +84,19 @@ class ModelFormBuilder extends Component
         return $filteredFields = array_diff($fields, ['id', 'created_at', 'updated_at', 'custom_fields']);
     }
 
-    public function getFieldSettings(): Collection
+    public function getFieldSettings()
     {
-        return CustomerFieldSetting::all();
+        if (empty($this->model)) {
+            return collect();
+        }
+
+        $fieldSettingClass = $this->model . 'FieldSetting';
+
+        if (class_exists($fieldSettingClass)) {
+            return app()->make($fieldSettingClass)::all();
+        }
+
+        return collect();
     }
 
 

@@ -13,8 +13,8 @@
                 <select id="model" name="model" wire:model.live="model" @change="error = ''"
                         class="w-full border-slate-300 px-2 py-1.5 rounded-md cursor-pointer">
                     <option disabled selected value="">Objekt auswählen</option>
-                    <option value="CUSTOMER">Kunden</option>
-                    <option value="CONTACTS">Kontakte</option>
+                    <option value="Customer">Kunden</option>
+                    <option value="contact">Kontakte</option>
                 </select>
             </div>
         </div>
@@ -91,11 +91,12 @@
                 </ul>
             </form>
         @endif
+        {{--
         @if(count($settings) === 0)
             <div class="flex justify-center py-6">
                 <em class="text-slate-400">Es wurden noch keine Felder hinzugefügt.</em>
             </div>
-        @endif
+        @endif--}}
     </div>
 
     <script>
