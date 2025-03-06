@@ -3,9 +3,12 @@
 namespace App\Livewire;
 
 use App\Classes\FieldTypes;
+use App\Models\CustomerFieldSetting;
 use App\Models\CustomerValue;
 use App\Models\CustomField;
 use App\Models\FormTemplate;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -20,6 +23,9 @@ class ModelFormBuilder extends Component
     public int $columns = 2;
     public string $form = '';
 
+    public array $fields = [];
+    public Collection $fieldSettings;
+
     public function mount(): void
     {
         $this->fieldTypes = FieldTypes::getFieldTypes();
@@ -33,7 +39,9 @@ class ModelFormBuilder extends Component
             $this->columns = $template->grid_columns ?? 2;
         }
 
-        $this->getFields();
+        $this->fields = $this->getFields();
+
+        $this->fieldSettings = $this->getFieldSettings();
 
         $this->form = view('components.forms.basic-form', [
             'fieldTypes' => $this->fieldTypes,
@@ -68,43 +76,23 @@ class ModelFormBuilder extends Component
             return;
         }
 
-        $orderCount = CustomField::where('model', 'CUSTOMER')->count();
-
-        CustomField::create([
-            'model' => 'CUSTOMER',
-            'name' => $data['name'],
-            'slug' => Str::slug($data['name']),
-            'type' => $data['type'],
-            'required' => $data['required'],
-            'order' => $orderCount + 1,
-        ]);
-
         $this->getFields();
         $this->dispatch('close-modal', name: 'addCustomField');
     }
 
 
-    public function deactivateCustomField(CustomerValue $field): void
+    public function getFields(): array
     {
+        $fields = Schema::getColumnListing('customers');
+
+        return $filteredFields = array_diff($fields, ['id', 'created_at', 'updated_at', 'custom_fields']);
     }
 
-    public function getFields(): void
+    public function getFieldSettings(): Collection
     {
-        $this->customFields = [];
-
-        $customFields = CustomField::where('model', $this->model)->get();
-
-        foreach ($customFields as $customField) {
-            $this->customFields[] = [
-                'id' => $customField->id,
-                'name' => $customField->name,
-                'required' => $customField->required,
-                'type' => $customField->type,
-                'order' => $customField->order,
-                'value' => '',
-            ];
-        }
+        return CustomerFieldSetting::all();
     }
+
 
     public function saveSettings(array $data): void
     {
@@ -113,7 +101,6 @@ class ModelFormBuilder extends Component
                 'model' => $this->model,
             ], [
                 'grid_columns' => $data['template']['grid_columns'],
-
             ]);
         }
     }

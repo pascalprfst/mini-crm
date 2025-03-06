@@ -20,12 +20,7 @@ class TableBuilder extends Component
         $this->getFields();
 
         $this->customers = Customer::all();
-
-        // Ausgabe wenn keine customFields
-        // Seeder für customFields anpassen
-        // Erstmal fixe Tabellen Breiten
-        // Spalten größen dynamisch setzen
-        // Scrollbar disablen*/
+        
     }
 
     public function updatedModel(): void
@@ -35,17 +30,6 @@ class TableBuilder extends Component
 
     public function getFields(): void
     {
-        $this->customFields = [];
-
-        $customFields = CustomField::where('model', $this->model)->get();
-
-        foreach ($customFields as $customField) {
-            $this->customFields[] = [
-                'id' => $customField->id,
-                'name' => $customField->name,
-                'order' => $customField->order,
-            ];
-        }
     }
 
     public function render(): View

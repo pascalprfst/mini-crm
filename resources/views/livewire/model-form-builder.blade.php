@@ -58,44 +58,44 @@
                     </div>
                 </div>
 
-                <ul x-sort
-                    :style="'grid-template-columns: repeat(' + columns + ', 1fr)'"
+                <ul x-sort :style="'grid-template-columns: repeat(' + columns + ', 1fr)'"
                     class="grid gap-4">
-                    <template x-for="field in fields">
+                    @foreach($fieldSettings as $setting)
                         <li>
                             <div x-sort:item
                                  class="cursor-grab bg-slate-100 p-1.5 rounded-md border-2 border-dotted border-slate-300 relative">
                                 <div class="absolute right-2.5 top-2 flex items-center gap-x-2">
-                                    <i x-show="field.required"
-                                       class="fa-solid fa-triangle-exclamation text-slate-800 font-bold"></i>
+                                    @if($setting->required)
+                                        <i class="fa-solid fa-triangle-exclamation text-slate-800 font-bold"></i>
+                                    @endif
                                     <i @click="$dispatch('open-modal', {name: 'editCustomField',  data: '12345' })"
                                        class="fa-solid fa-pencil text-slate-800 cursor-pointer"></i>
-                                    <i @click="deactivateField(field.id)"
+                                    <i @click="deactivateField({{$setting->id}})"
                                        class="fa-solid fa-ban text-red-500 cursor-pointer"></i>
                                     <i class="fa-solid fa-trash-can text-red-500 cursor-pointer"></i>
                                 </div>
                                 <div>
                                     <div class="text-sm text-slate-500">
-                                        <span class="font-bold">Name:</span> <span x-text="field.name"></span>
+                                        <span class="font-bold">Name:</span> {{$setting->field_name}}
                                     </div>
                                 </div>
                                 <div class="text-sm text-slate-500">
-                                    <span class="font-bold">Feldtyp:</span> <span x-text="field.type"></span>
+                                    <span class="font-bold">Feldtyp:</span> {{$setting->field_type}}
                                 </div>
                                 <div class="text-sm text-slate-500">
                                     <span class="font-bold">Status:</span> <span>Aktiv</span>
                                 </div>
                             </div>
                         </li>
-                    </template>
+                    @endforeach
                 </ul>
             </form>
         @endif
-        <template x-if="fields.length === 0">
+        @if(count($settings) === 0)
             <div class="flex justify-center py-6">
                 <em class="text-slate-400">Es wurden noch keine Felder hinzugefügt.</em>
             </div>
-        </template>
+        @endif
     </div>
 
     <script>
@@ -103,7 +103,6 @@
             Alpine.data('formBuilder', ($wire) => ({
                 open: false,
                 columns: $wire.entangle('columns'),
-                fields: $wire.entangle('customFields'),
                 error: '',
 
                 changeColumns(columns) {
