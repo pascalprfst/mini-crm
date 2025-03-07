@@ -13,7 +13,7 @@
                 <select id="model" name="model" wire:model.live="model" @change="error = ''"
                         class="w-full border-slate-300 px-2 py-1.5 rounded-md cursor-pointer">
                     <option disabled selected value="">Objekt auswählen</option>
-                    <option value="Customer">Kunden</option>
+                    <option value="customer">Kunden</option>
                     <option value="contact">Kontakte</option>
                 </select>
             </div>
@@ -63,15 +63,20 @@
                     @foreach($fieldSettings as $setting)
                         <li>
                             <div x-sort:item
-                                 class="cursor-grab bg-slate-100 p-1.5 rounded-md border-2 border-dotted border-slate-300 relative">
+                                 class="{{!$setting->active ? 'bg-red-100' : 'bg-slate-100'}} cursor-grab p-1.5 rounded-md border-2 border-dotted border-slate-300 relative">
                                 <div class="absolute right-2.5 top-2 flex items-center gap-x-2">
                                     @if($setting->required)
                                         <i class="fa-solid fa-triangle-exclamation text-slate-800 font-bold"></i>
                                     @endif
                                     <i @click="$dispatch('open-modal', {name: 'editCustomField',  data: '12345' })"
                                        class="fa-solid fa-pencil text-slate-800 cursor-pointer"></i>
-                                    <i @click="deactivateField({{$setting->id}})"
-                                       class="fa-solid fa-ban text-red-500 cursor-pointer"></i>
+                                    @if($setting->active)
+                                        <i wire:click="toggleFieldStatus({{$setting->id}})"
+                                           class="fa-solid fa-ban text-red-500 cursor-pointer"></i>
+                                    @else
+                                        <i wire:click="toggleFieldStatus({{$setting->id}})"
+                                           class="fa-solid fa-check text-green-500 cursor-pointer"></i>
+                                    @endif
                                     <i class="fa-solid fa-trash-can text-red-500 cursor-pointer"></i>
                                 </div>
                                 <div>
@@ -83,7 +88,8 @@
                                     <span class="font-bold">Feldtyp:</span> {{$setting->field_type}}
                                 </div>
                                 <div class="text-sm text-slate-500">
-                                    <span class="font-bold">Status:</span> <span>Aktiv</span>
+                                    <span class="font-bold">Status:</span>
+                                    <span>{{$setting->active ? 'Aktiv' : 'Inaktiv'}}</span>
                                 </div>
                             </div>
                         </li>

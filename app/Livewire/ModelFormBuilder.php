@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Classes\FieldTypes;
+use App\Models\CustomerFieldSetting;
 use App\Models\FormTemplate;
+use App\Services\FieldSettingService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
@@ -12,13 +14,10 @@ use Livewire\Component;
 class ModelFormBuilder extends Component
 {
     public string $model = '';
-
-    public array $customFields = [];
     public array $fieldTypes = [];
     public string $error = '';
     public int $columns = 2;
     public string $form = '';
-
     public array $fields = [];
     public Collection $fieldSettings;
 
@@ -35,14 +34,11 @@ class ModelFormBuilder extends Component
             $this->columns = $template->grid_columns ?? 2;
         }
 
-        $this->fields = $this->getFields();
-
         $this->fieldSettings = $this->getFieldSettings();
 
         $this->form = view('components.forms.basic-form', [
             'fieldTypes' => $this->fieldTypes,
         ]);
-
     }
 
     public function selectForm(string $type): void
@@ -72,33 +68,32 @@ class ModelFormBuilder extends Component
             return;
         }
 
-        $this->getFields();
+        $model = config('field-settings.' . $this->model);
+        $model::create([
+            'field_name' => $data['name'],
+            'field_type' => $data['type'],
+            'order' => $this->fieldSettings->count() + 1,
+            'required' => true,
+            'custom_field' => true,
+        ]);
+
+        $this->fieldSettings = $this->getFieldSettings();
+
         $this->dispatch('close-modal', name: 'addCustomField');
     }
 
-
-    public function getFields(): array
+    public function getFieldSettings(): Collection
     {
-        $fields = Schema::getColumnListing('customers');
+        $model = config('field-settings.' . $this->model);
 
-        return $filteredFields = array_diff($fields, ['id', 'created_at', 'updated_at', 'custom_fields']);
+        return $model::orderBy('order', 'ASC')->get();
     }
 
-    public function getFieldSettings()
+    public function toggleFieldStatus(CustomerFieldSetting $setting): void
     {
-        if (empty($this->model)) {
-            return collect();
-        }
-
-        $fieldSettingClass = $this->model . 'FieldSetting';
-
-        if (class_exists($fieldSettingClass)) {
-            return app()->make($fieldSettingClass)::all();
-        }
-
-        return collect();
+        $setting->active = !$setting->active;
+        $setting->save();
     }
-
 
     public function saveSettings(array $data): void
     {

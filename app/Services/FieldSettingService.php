@@ -20,7 +20,7 @@ class FieldSettingService
     public function getFieldSettings(): Collection|null
     {
         return match ($this->type) {
-            'customer' => CustomerFieldSetting::all(),
+            'customer' => CustomerFieldSetting::orderBy('order', 'asc')->get(),
             default => null,
         };
     }

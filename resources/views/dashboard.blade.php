@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div x-cloak x-data="{section: 'tableBuilder'}">
+    <div x-cloak x-data="{section: 'formBuilder'}">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
             <button @click="section = 'formBuilder'"
                     :class="section === 'formBuilder' ? 'text-blue-600' : 'text-slate-800'"

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCustomerRequest;
-use App\Models\CustomField;
+use App\Models\CustomerFieldSetting;
 use App\Models\FormTemplate;
 use App\Services\CustomerService;
 use Illuminate\Http\RedirectResponse;
@@ -14,7 +14,7 @@ class CustomerController extends Controller
     public function create(): View
     {
         return view('customer.create', [
-            'formFields' => CustomField::where('model', 'CUSTOMER')->get(),
+            'fields' => CustomerFieldSetting::where('active', true)->get(),
             'formTemplate' => FormTemplate::where('model', 'CUSTOMER')->first(),
         ]);
     }
