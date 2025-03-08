@@ -11,9 +11,9 @@
                 <div class="p-6">
                     <h2 class="font-bold text-slate-800">Neuen Kunden anlegen</h2>
 
-                    @if(count($formFields) > 0)
+                    @if(count($fields) > 0)
                         <x-forms.form-template action="{{route('customers.store')}}" :template="$formTemplate"
-                                               :fields="$formFields" model="Kunden"/>
+                                               :fields="$fields" model="Kunden"/>
                     @endif
                 </div>
             </div>

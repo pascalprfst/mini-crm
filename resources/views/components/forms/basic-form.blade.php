@@ -1,5 +1,5 @@
 <div>
-    <form @submit.prevent="submitForm" x-data="addNewField" class="mt-4">
+    <form @submit.prevent="submitForm" x-data="addNewField($wire)" class="mt-4">
 
         <label for="fieldname" class="text-sm text-slate-600 relative">
             Feldname<span class="text-red-500">*</span>

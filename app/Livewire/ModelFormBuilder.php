@@ -5,9 +5,7 @@ namespace App\Livewire;
 use App\Classes\FieldTypes;
 use App\Models\CustomerFieldSetting;
 use App\Models\FormTemplate;
-use App\Services\FieldSettingService;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -18,7 +16,6 @@ class ModelFormBuilder extends Component
     public string $error = '';
     public int $columns = 2;
     public string $form = '';
-    public array $fields = [];
     public Collection $fieldSettings;
 
     public function mount(): void
@@ -93,6 +90,8 @@ class ModelFormBuilder extends Component
     {
         $setting->active = !$setting->active;
         $setting->save();
+
+        $this->fieldSettings = $this->getFieldSettings();
     }
 
     public function saveSettings(array $data): void

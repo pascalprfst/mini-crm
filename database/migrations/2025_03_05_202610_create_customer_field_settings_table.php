@@ -3,7 +3,6 @@
 use App\Models\CustomerFieldSetting;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
@@ -15,6 +14,7 @@ return new class extends Migration {
         Schema::create('customer_field_settings', function (Blueprint $table) {
             $table->id();
             $table->string('field_name');
+            $table->string('slug')->unique();
             $table->string('field_type');
             $table->integer('order')->default(0);
             $table->boolean('required')->default(false);
@@ -25,54 +25,63 @@ return new class extends Migration {
 
         CustomerFieldSetting::create([
             'field_name' => 'name',
+            'slug' => 'name',
             'field_type' => 'text',
             'order' => 1,
         ]);
 
         CustomerFieldSetting::create([
             'field_name' => 'street',
+            'slug' => 'street',
             'field_type' => 'text',
             'order' => 2,
         ]);
 
         CustomerFieldSetting::create([
             'field_name' => 'postalcode',
+            'slug' => 'postalcode',
             'field_type' => 'text',
             'order' => 3,
         ]);
 
         CustomerFieldSetting::create([
             'field_name' => 'city',
+            'slug' => 'city',
             'field_type' => 'text',
             'order' => 4,
         ]);
 
         CustomerFieldSetting::create([
             'field_name' => 'country',
+            'slug' => 'country',
             'field_type' => 'text',
             'order' => 5,
         ]);
 
         CustomerFieldSetting::create([
             'field_name' => 'telephone',
+            'slug' => 'telephone',
             'field_type' => 'text',
             'order' => 6,
         ]);
 
         CustomerFieldSetting::create([
             'field_name' => 'email',
+            'slug' => 'email',
             'field_type' => 'email',
             'order' => 7,
         ]);
 
         CustomerFieldSetting::create([
             'field_name' => 'website',
+            'slug' => 'website',
             'field_type' => 'url',
             'order' => 8,
         ]);
 
         CustomerFieldSetting::create([
             'field_name' => 'description',
+            'slug' => 'description',
             'field_type' => 'longtext',
             'order' => 9,
         ]);

@@ -5,17 +5,17 @@
 @endphp
 
     <!-- Basic Fields -->
-@if(in_array($field['type'], $standardTypes))
+@if(in_array($field['field_type'], $standardTypes))
     <div>
         <label for="{{$field['slug']}}" class="text-sm font-medium text-slate-600">
-            {{$field['name']}}
+            {{$field['field_name']}}
             @if($field['required'])
                 <span class="text-red-500 relative -left-0.5">*</span>
             @endif
         </label>
         <div>
-            <input type="{{$field['type']}}" id="{{$field['slug']}}" value="{{old($field['slug'])}}"
-                   name="{{$field['slug']}}"
+            <input type="{{$field['field_type']}}" id="{{$field['field_name']}}" value="{{old($field['field_name'])}}"
+                   name="{{$field['field_name']}}"
                    {{$attributes}} class="w-full border-slate-300 px-2 py-1.5 rounded-md cursor-pointer"/>
         </div>
         <div>
