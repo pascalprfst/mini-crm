@@ -8,7 +8,7 @@
 @if(in_array($field['field_type'], $standardTypes))
     <div>
         <label for="{{$field['slug']}}" class="text-sm font-medium text-slate-600">
-            {{$field['field_name']}}
+            {{ __('form-fields.' . $field['field_name']) != 'form-fields.' . $field['field_name'] ? __('form-fields.' . $field['field_name']) : $field['field_name'] }}
             @if($field['required'])
                 <span class="text-red-500 relative -left-0.5">*</span>
             @endif
@@ -31,10 +31,10 @@
 @endif
 
 <!-- Textarea -->
-@if($field['type'] === 'longtext')
+@if($field['field_type'] === 'longtext')
     <div>
         <label for="{{$field['slug']}}" class="text-sm font-medium text-slate-600">
-            {{$field['name']}}
+            {{ __('form-fields.' . $field['field_name']) != 'form-fields.' . $field['field_name'] ? __('form-fields.' . $field['field_name']) : $field['field_name'] }}
             @if($field['required'])
                 <span class="text-red-500 relative -left-0.5">*</span>
             @endif

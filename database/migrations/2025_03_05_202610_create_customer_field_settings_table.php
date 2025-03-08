@@ -28,6 +28,7 @@ return new class extends Migration {
             'slug' => 'name',
             'field_type' => 'text',
             'order' => 1,
+            'required' => true,
         ]);
 
         CustomerFieldSetting::create([
@@ -35,6 +36,7 @@ return new class extends Migration {
             'slug' => 'street',
             'field_type' => 'text',
             'order' => 2,
+            'required' => true,
         ]);
 
         CustomerFieldSetting::create([
@@ -42,6 +44,7 @@ return new class extends Migration {
             'slug' => 'postalcode',
             'field_type' => 'text',
             'order' => 3,
+            'required' => true,
         ]);
 
         CustomerFieldSetting::create([
@@ -49,6 +52,7 @@ return new class extends Migration {
             'slug' => 'city',
             'field_type' => 'text',
             'order' => 4,
+            'required' => true,
         ]);
 
         CustomerFieldSetting::create([

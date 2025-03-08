@@ -62,8 +62,10 @@
                     class="grid gap-4">
                     @foreach($fieldSettings as $setting)
                         <li>
-                            <div x-sort:item
-                                 class="{{!$setting->active ? 'bg-red-100' : 'bg-slate-100'}} cursor-grab p-1.5 rounded-md border-2 border-dotted border-slate-300 relative">
+                            <div @if($setting->active)
+                                     x-sort:item
+                                 @endif
+                                 class="{{!$setting->active ? 'bg-red-100' : 'bg-slate-100 cursor-grab'}}  p-1.5 rounded-md border-2 border-dotted border-slate-300 relative">
                                 <div class="absolute right-2.5 top-2 flex items-center gap-x-2">
                                     @if($setting->required)
                                         <i class="fa-solid fa-triangle-exclamation text-slate-800 font-bold"></i>
