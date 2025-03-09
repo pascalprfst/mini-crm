@@ -11,11 +11,47 @@
         valide Dateitypen.
     </p>
 
-    <div class="w-full p-3 bg-slate-100 rounded-md flex gap-x-3">
+    <label for="upload" class="w-full p-3 bg-slate-100 rounded-md flex gap-x-3 cursor-pointer">
         <div class="w-full min-h-20 border-2 border-dotted border-slate-300 rounded-md relative">
             <em class="text-slate-400 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">Datei hier
                 ablegen</em>
         </div>
-    </div>
+    </label>
+    <input type="file" wire:model="file" class="hidden" id="upload"/>
+
+    @if($file && $error === '')
+        <div class="mt-6">
+            <div class="mt-6 p-2 bg-green-200 border border-green-500 rounded-sm">
+                <div class="text-green-500">
+                    <i class="fa-solid fa-circle-check mr-1.5 relative top-px"></i>{{$file->getClientOriginalName()}}
+                    erfolgreich hochgeladen.
+                </div>
+            </div>
+        </div>
+
+        <div class="w-1/2 mt-4">
+            <label for="model" class="text-sm font-medium text-slate-600">In Welche Datenbank möchtest du deine Daten
+                importieren?</label>
+            <div>
+                <select id="model" name="model" wire:model.live="model"
+                        class="w-full border-slate-300 px-2 py-1.5 rounded-md cursor-pointer">
+                    <option disabled selected value="">Objekt auswählen</option>
+                    <option value="customer">Kunden</option>
+                    <option value="contact">Kontakte</option>
+                </select>
+            </div>
+        </div>
+
+        <div wire:show="model" class="mt-4">
+            Test
+        </div>
+    @endif
+    @if($error)
+        <div class="mt-6 p-2 bg-red-200 border border-red-600 rounded-sm">
+            <div class="text-red-600">
+                <i class="fa-solid fa-triangle-exclamation mr-1.5 relative top-px"></i>{{$error}}
+            </div>
+        </div>
+    @endif
 </div>
 
