@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactFieldSetting extends Model
 {
-    //
+    protected $guarded = ['id'];
 }

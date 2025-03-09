@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\CustomField;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -10,6 +10,24 @@ class Export extends Component
 {
     public string $model = '';
     public string $error = '';
+    public Collection $fields;
+    public Collection $fieldsToExport;
+
+    public function updatedModel(): void
+    {
+        $model = config('field-settings.' . $this->model);
+
+        $this->fields = $model::orderBy('order', 'ASC')->get();
+    }
+
+    public function selectFieldForExport(int $id): void
+    {
+        // Anhand der ID aus $fields erhalten
+        // in fieldsToExport schieben
+        // CSS in der Dropzone anpassen
+        // Border Blau
+        //
+    }
 
     public function export(array $data): void
     {
@@ -36,10 +54,7 @@ class Export extends Component
 
     public function render(): View
     {
-        $fields = CustomField::where('model', $this->model)->get();
-
         return view('livewire.export', [
-            'fields' => $fields,
         ]);
     }
 }

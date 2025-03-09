@@ -1,12 +1,12 @@
 Alpine.data('addNewField', ($wire) => ({
     type: 'text',
-    name: '',
+    field_name: '',
     required: false,
     errors: [],
     types: ['text', 'date', 'url', 'email', 'longtext'],
 
     submitForm() {
-        if (this.name.length === 0) {
+        if (this.field_name.length === 0) {
             this.errors.push({
                 error: 'Das Feld braucht einen Namen.'
             })
@@ -21,9 +21,38 @@ Alpine.data('addNewField', ($wire) => ({
         }
 
         $wire.addFormField({
-            name: this.name,
+            name: this.field_name,
             type: this.type,
             required: this.required
         });
-    }
+    },
 }))
+
+Alpine.data('formBuilder', ($wire) => ({
+    open: false,
+    columns: $wire.entangle('columns'),
+    error: '',
+
+    changeColumns(columns) {
+        if (![1, 2, 3].includes(this.columns)) {
+            return;
+        }
+
+        this.columns = columns;
+    },
+
+    saveSettings() {
+        if (![1, 2, 3].includes(this.columns)) {
+            this.error = "Diese Spaltenanzahl ist nicht erlaubt."
+            return;
+        }
+
+        const data = {
+            template: {
+                grid_columns: this.columns
+            }
+        }
+        $wire.saveSettings(data);
+    },
+}))
+

@@ -1,4 +1,4 @@
-<div x-data="exportSystem" x-cloak>
+<div x-data="exportSystem($wire)" x-cloak>
     <div class="pb-2 flex justify-between mb-2">
         <h2 class="font-bold text-slate-800">Export</h2>
     </div>
@@ -9,8 +9,8 @@
             <select id="model" name="model" wire:model.live="model"
                     class="w-full border-slate-300 px-2 py-1.5 rounded-md cursor-pointer">
                 <option disabled selected value="">Objekt auswählen</option>
-                <option value="CUSTOMER">Kunden</option>
-                <option value="CONTACTS">Kontakte</option>
+                <option value="customer">Kunden</option>
+                <option value="contact">Kontakte</option>
             </select>
         </div>
     </div>
@@ -62,11 +62,11 @@
             <div class="my-6">
                 <span class="text-slate-600 text-sm font-medium">Verfügbare Felder</span>
                 <ul x-sort x-sort:group="fields" class="flex gap-3 flex-wrap mt-1">
-                    @foreach($fields as $field)
-                        <li x-sort:item>
+                    @foreach($fields as $index => $field)
+                        <li x-sort:item wire:key="{{$index}}">
                             <div
                                 class="border border-slate-300 rounded-sm px-2.5 text-slate-800 cursor-pointer whitespace-nowrap">
-                                {{$field->name}}
+                                {{ __('form-fields.' . $field['field_name']) != 'form-fields.' . $field['field_name'] ? __('form-fields.' . $field['field_name']) : $field['field_name'] }}
                             </div>
                         </li>
                     @endforeach
@@ -75,7 +75,7 @@
 
             <div class="w-full p-3 bg-slate-100 rounded-md flex gap-x-3">
                 <div class="w-full min-h-20 border-2 border-dotted border-slate-300 rounded-md relative">
-                    <ul x-sort x-sort:group="fields" class="flex gap-3">
+                    <ul x-sort x-sort:group="fields" @drop="$wire.selectFieldForExport(2);" class="flex gap-3">
 
                     </ul>
                     <em class="text-slate-400 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">Felder heir
@@ -102,7 +102,7 @@
     @endif
     <script>
         document.addEventListener('alpine:init', () => {
-            Alpine.data('exportSystem', () => ({
+            Alpine.data('exportSystem', ($wire) => ({
                 type: 'csv',
                 withHeader: false,
                 filename: '',
@@ -129,7 +129,7 @@
                         soring: this.sorting,
                     };
 
-                    this.$wire.export(data);
+                    $wire.export(data);
                 },
 
                 validateFilename(name) {

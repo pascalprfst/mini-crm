@@ -1,6 +1,11 @@
 <div x-data="formBuilder($wire)" x-cloak>
-    @include('models.add-field')
-    @include('models.edit-field')
+
+    <div x-data="addNewField($wire)">
+        @include('models.add-field')
+    </div>
+    <div>
+        @include('models.edit-field')
+    </div>
 
     <div>
         <div class="pb-2 flex justify-between mb-2">
@@ -109,33 +114,7 @@
 
     <script>
         document.addEventListener('alpine:init', () => {
-            Alpine.data('formBuilder', ($wire) => ({
-                open: false,
-                columns: $wire.entangle('columns'),
-                error: '',
 
-                changeColumns(columns) {
-                    if (![1, 2, 3].includes(this.columns)) {
-                        return;
-                    }
-
-                    this.columns = columns;
-                },
-
-                saveSettings() {
-                    if (![1, 2, 3].includes(this.columns)) {
-                        this.error = "Diese Spaltenanzahl ist nicht erlaubt."
-                        return;
-                    }
-
-                    const data = {
-                        template: {
-                            grid_columns: this.columns
-                        }
-                    }
-                    $wire.saveSettings(data);
-                },
-            }))
         })
     </script>
 </div>

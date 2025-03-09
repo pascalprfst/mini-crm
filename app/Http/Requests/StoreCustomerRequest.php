@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Classes\FieldTypes;
+use App\Models\CustomerFieldSetting;
 use App\Models\CustomerValue;
 use App\Models\CustomField;
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,19 +27,15 @@ class StoreCustomerRequest extends FormRequest
     public function rules(): array
     {
         $fieldTypes = FieldTypes::getFieldTypes();
-        $customFields = CustomField::where('model', 'CUSTOMER')->get()->toArray();
+        $fieldSettings = CustomerFieldSetting::where('active', true)->get();
+
+        // Alle aktiven Felder erhalten
+        // slug als key setzen
+        // value als regeln der fieldTypes
+        // required/nullable anhand der fieldsettings
 
         $data = [];
-        foreach ($customFields as $field) {
-            $validationRules = '';
-            Log::info($field['type']);
-            foreach ($fieldTypes as $type) {
-                if ($field['type'] === $type['type']) {
-                    $validationRules = $type['validationRules'];
-                }
-            }
-            $data[$field['slug']] = $validationRules .= $field['required'] ? '|required' : '|nullable';
-        }
+
         return $data;
     }
 }
