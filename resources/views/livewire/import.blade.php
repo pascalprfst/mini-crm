@@ -78,6 +78,10 @@
                     @endforeach
                 </div>
             </div>
+
+            <div class="mt-6">
+                <x-primary-button>Prüfen</x-primary-button>
+            </div>
         @endif
     @endif
 
@@ -100,8 +104,6 @@
 
                 dropField(index) {
                     const container = document.getElementById('drop-container-' + index);
-                    container.classList.remove('border-slate-300');
-                    container.classList.add('border-green-500');
 
                     const droppedItem = container.querySelectorAll("ul li");
                     droppedItem[0].classList.add("text-center", "bg-slate-300");
