@@ -11,6 +11,11 @@ use Illuminate\View\View;
 
 class CustomerController extends Controller
 {
+    public function index(): void
+    {
+
+    }
+
     public function create(): View
     {
         return view('customer.create', [
@@ -21,8 +26,6 @@ class CustomerController extends Controller
 
     public function store(StoreCustomerRequest $request, CustomerService $service): RedirectResponse
     {
-        dd($request->validated());
-
         $service->create($request->validated());
 
         return redirect()->route('customers.create')->with('success', 'Kunde erfolgreich angelegt.');

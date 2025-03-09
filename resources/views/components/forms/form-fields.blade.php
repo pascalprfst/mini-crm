@@ -15,7 +15,7 @@
         </label>
         <div>
             <input type="{{$field['field_type']}}" id="{{$field['field_name']}}" value="{{old($field['field_name'])}}"
-                   name="{{$field['field_name']}}"
+                   name="{{$field['slug']}}"
                    {{$attributes}} class="w-full border-slate-300 px-2 py-1.5 rounded-md cursor-pointer"/>
         </div>
         <div>

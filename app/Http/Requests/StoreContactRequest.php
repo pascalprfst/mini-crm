@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Actions\FormRequestValidator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCustomerRequest extends FormRequest
+class StoreContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +22,6 @@ class StoreCustomerRequest extends FormRequest
      */
     public function rules(FormRequestValidator $action): array
     {
-        return $action->handle('customer');
+        return $action->handle('contact');
     }
 }

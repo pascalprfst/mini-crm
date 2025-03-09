@@ -13,7 +13,7 @@ return new class extends Migration {
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Customer::class)->constrained();
+            $table->foreignIdFor(Customer::class)->nullable()->constrained();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->nullable();
