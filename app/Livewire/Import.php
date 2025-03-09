@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Services\CsvService;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -14,7 +15,7 @@ class Import extends Component
 
     public ?TemporaryUploadedFile $file = NULL;
     public string $model = '';
-    public array $tableColumns = [];
+    public Collection $tableColumns;
     public array $uploadColumns = [];
     public string $error = '';
 
@@ -28,16 +29,13 @@ class Import extends Component
         }
 
         $this->uploadColumns = CSVService::getData($this->file->getRealPath(), true);
-        
     }
 
     public function updatedModel(): void
     {
         $model = config('field-settings.' . $this->model);
 
-        $this->tableColumns = $model::select('field_name', 'slug')->get()->toArray();
-
-        $this->js('getTableColumns', $this->tableColumns);
+        $this->tableColumns = $model::select('field_name', 'slug')->get();
 
         $this->js('getUploadColumns', $this->uploadColumns);
     }

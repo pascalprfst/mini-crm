@@ -14,9 +14,16 @@
                 Import
             </button>
 
-            <button :class="section === 'export' ? 'text-blue-600' : 'text-slate-800'" @click="section = 'export'">
+            <button :class="section === 'export' ? 'text-blue-600' : 'text-slate-800'" @click="section = 'export'"
+                    class="mr-4">
                 <i class="fa-solid fa-cloud-arrow-down text-lg mr-0.5"></i>
                 Export
+            </button>
+
+            <button :class="section === 'my-imports' ? 'text-blue-600' : 'text-slate-800'"
+                    @click="section = 'my-imports'">
+                <i class="fa-solid fa-cloud text-lg mr-0.5"></i>
+                Meine Imports
             </button>
         </div>
 
