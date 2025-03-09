@@ -27,12 +27,19 @@ class Import extends Component
             return;
         }
 
-        $csvService = new CsvService($this->file->getRealPath());
+        $this->uploadColumns = CSVService::getData($this->file->getRealPath(), true);
+        
+    }
 
-        dd($csvService->read());
+    public function updatedModel(): void
+    {
+        $model = config('field-settings.' . $this->model);
 
-        // Nach Model Auswahl Tabellenspalten als Ziel ausgeben
-        // Spalten der CSV azeigen
+        $this->tableColumns = $model::select('field_name', 'slug')->get()->toArray();
+
+        $this->js('getTableColumns', $this->tableColumns);
+
+        $this->js('getUploadColumns', $this->uploadColumns);
     }
 
     public function render(): View

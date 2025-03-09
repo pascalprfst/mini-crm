@@ -1,4 +1,4 @@
-<div>
+<div x-data="importFunction($wire)">
     <div class="pb-2 flex justify-between mb-2">
         <h2 class="font-bold text-slate-800">Import</h2>
     </div>
@@ -30,7 +30,7 @@
         </div>
 
         <div class="w-1/2 mt-4">
-            <label for="model" class="text-sm font-medium text-slate-600">In Welche Datenbank möchtest du deine Daten
+            <label for="model" class="font-medium text-slate-600">In Welche Datenbank möchtest du deine Daten
                 importieren?</label>
             <div>
                 <select id="model" name="model" wire:model.live="model"
@@ -43,7 +43,20 @@
         </div>
 
         <div wire:show="model" class="mt-4">
-            Test
+            <p class="text-slate-600 font-medium">Felder aus <b>{{$file->getClientOriginalName()}}</b></p>
+
+            <ul x-sort class="flex gap-3 flex-nowrap mt-1">
+                <template x-for="column in uploadColumns">
+                    <li x-sort:item class="border border-slate-300 rounded-sm px-2.5 py-1 cursor-grab">
+                        <div x-text="column">
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </div>
+
+        <div wire:show="model" class="mt-4">
+            <p class="text-slate-600 font-medium">Verfügbare Felder</p>
         </div>
     @endif
     @if($error)
@@ -53,5 +66,19 @@
             </div>
         </div>
     @endif
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('importFunction', ($wire) => ({
+                uploadColumns: [],
+
+                getUploadColumns(data) {
+                    this.uploadColumns = data;
+                },
+                
+            }))
+
+        })
+    </script>
 </div>
 

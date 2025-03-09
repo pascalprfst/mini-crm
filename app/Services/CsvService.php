@@ -4,20 +4,17 @@ namespace App\Services;
 
 class CsvService
 {
-    private string $filePath;
-
-    public function __construct(string $filePath)
-    {
-        $this->filePath = $filePath;
-    }
 
     /**
      * Reads a CSV and returns its content as an array.
+     *
+     * @param string $filePath
+     * @param bool $firstRow
      * @return array
      */
-    public function read(): array
+    public static function getData(string $filePath, bool $firstRow = false): array
     {
-        $file = fopen($this->filePath, "r");
+        $file = fopen($filePath, "r");
 
         $data = [];
 
@@ -26,6 +23,10 @@ class CsvService
         }
 
         fclose($file);
+
+        if ($firstRow) {
+            return $data[0];
+        }
 
         return $data;
     }
