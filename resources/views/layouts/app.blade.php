@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="overflow-hidden" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,25 +14,25 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
+    <style>
+        [x-cloak] {
+            display: none !important;
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
 </head>
 <body class="font-sans antialiased">
 <x-toast/>
-<div class="min-h-screen bg-slate-100">
-    @include('layouts.navigation')
+<div class="min-h-screen bg-gray-50 flex">
+    @include('layouts.sidebar')
+    <div class="w-full">
+        @include('layouts.header')
 
-    <!-- Page Heading -->
-    @isset($header)
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
-    @endisset
-
-    <!-- Page Content -->
-    <main>
-        {{ $slot }}
-    </main>
+        <main class="py-6 px-8 overflow-y-auto h-[calc(100vh-48px)]">
+            {{ $slot }}
+        </main>
+    </div>
 </div>
 @livewireScripts
 </body>

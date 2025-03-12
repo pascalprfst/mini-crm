@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('field_name');
             $table->string('slug')->unique();
             $table->string('field_type');
+            $table->boolean('locked')->default(false);
             $table->integer('order')->default(0);
             $table->boolean('required')->default(false);
             $table->boolean('active')->default(true);
@@ -27,6 +28,7 @@ return new class extends Migration {
             'field_name' => 'name',
             'slug' => 'name',
             'field_type' => 'text',
+            'locked' => true,
             'order' => 1,
             'required' => true,
         ]);
@@ -35,6 +37,7 @@ return new class extends Migration {
             'field_name' => 'street',
             'slug' => 'street',
             'field_type' => 'text',
+            'locked' => true,
             'order' => 2,
             'required' => true,
         ]);
@@ -43,6 +46,7 @@ return new class extends Migration {
             'field_name' => 'postalcode',
             'slug' => 'postalcode',
             'field_type' => 'text',
+            'locked' => true,
             'order' => 3,
             'required' => true,
         ]);
@@ -51,6 +55,7 @@ return new class extends Migration {
             'field_name' => 'city',
             'slug' => 'city',
             'field_type' => 'text',
+            'locked' => true,
             'order' => 4,
             'required' => true,
         ]);

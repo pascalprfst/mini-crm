@@ -18,7 +18,8 @@ class CsvService
 
         $data = [];
 
-        while (($row = fgetcsv($file, 1000, ',')) !== false) {
+        while (($line = fgets($file)) !== false) {
+            $row = str_getcsv($line, (str_contains($line, ';') ? ';' : ','));
             $data[] = $row;
         }
 

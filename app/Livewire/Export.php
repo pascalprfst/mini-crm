@@ -22,11 +22,6 @@ class Export extends Component
 
     public function selectFieldForExport(int $id): void
     {
-        // Anhand der ID aus $fields erhalten
-        // in fieldsToExport schieben
-        // CSS in der Dropzone anpassen
-        // Border Blau
-        //
     }
 
     public function export(array $data): void
