@@ -1,8 +1,8 @@
 <div x-data="{open: true}" x-cloak :class="open ? 'w-72' : 'w-12'"
-     class="h-screen bg-slate-100 relative transition-all duration-200 ease-in-out border-r border-r-slate-300 shadow-sm">
+     class="h-screen bg-slate-50 relative transition-all duration-200 ease-in-out border-r border-r-slate-300 shadow-sm">
     <i @click="open = !open"
        :class="!open ? 'rotate-180' : 'rotate-0'"
-       class="fa-solid fa-circle-chevron-left text-main text- text-xl absolute translate-x-1/2 right-0 top-2.5 cursor-pointer transition-all duration-200 ease-in-out"></i>
+       class="fa-solid fa-circle-chevron-left text-main text- text-xl absolute translate-x-1/2 right-0 top-2.5 z-20 cursor-pointer transition-all duration-200 ease-in-out"></i>
 
     <nav class="mt-16 px-2">
         <ul>
@@ -10,9 +10,9 @@
             <x-sidebar-link icon="fa-solid fa-building" label="Kunden" href="{{route('dashboard')}}"></x-sidebar-link>
             <x-sidebar-link icon="fa-solid fa-address-book" label="Kontakte"
                             href="{{route('dashboard')}}"></x-sidebar-link>
-            <x-sidebar-link icon="fa-solid fa-address-book" label="Import & Export"
+            <x-sidebar-link icon="fa-solid fa-database" label="Import & Export"
                             href="{{route('dashboard')}}"></x-sidebar-link>
-            <x-sidebar-link icon="fa-solid fa-hammer" label="Datenmodellierung">
+            <x-sidebar-link icon="fa-solid fa-hammer" label="App Builder">
             </x-sidebar-link>
 
             <x-sidebar-link icon="fa-solid fa-file" label="Dateiverwaltung">

@@ -1,7 +1,7 @@
 @props(['action' => false, 'template', 'fields' , 'model'])
 
 @if($action && $fields)
-    <form method="POST" action="{{$action}}" class="mt-6">
+    <form method="POST" action="{{$action}}">
         @csrf
         <div class="grid gap-x-5 gap-y-3 w-full"
              style="grid-template-columns: repeat({{$template->grid_columns ?? 2}}, 1fr)">

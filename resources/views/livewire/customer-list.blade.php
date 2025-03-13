@@ -1,7 +1,7 @@
 <x-section heading="Kundenübersicht">
     <div class="mt-2 mb-4">
         <div>
-            <input type="text" id="search" name="search" wire:model.live="search" placeholder="Suche..."
+            <input type="text" id="search" name="search" wire:model.live.debounce="search" placeholder="Suche..."
                    class="border border-slate-300 rounded-md py-1.5"/>
         </div>
     </div>

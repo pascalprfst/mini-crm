@@ -14,7 +14,10 @@ class CustomerList extends Component
     public function render(): View
     {
         $customers = Customer::when($this->search, function ($query) {
-            return $query->where('name', 'like', '%' . $this->search . '%');
+            return $query->where('name', 'like', '%' . $this->search . '%')
+                ->orWhere('email', 'like', '%' . $this->search . '%')
+                ->orWhere('street', 'like', '%' . $this->search . '%')
+                ->orWhere('custom_fields', 'like', '%' . $this->search . '%');
         })->get();
 
         return view('livewire.customer-list', [
