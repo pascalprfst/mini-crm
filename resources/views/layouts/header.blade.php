@@ -10,6 +10,17 @@
            class="fa-solid fa-chevron-down relative -top-px ml-0.5 transition-all duration-300 ease-in-out"></i>
         <div x-show="menuOpen" x-collapse
              class="w-60 bg-slate-100 border border-slate-300 rounded-sm shadow-sm px-4 py-2.5 absolute right-0 top-8">
+            <ul>
+                <li
+                    class="relative">
+                    <a href="{{route('profile.edit')}}"
+                       class="flex items-center cursor-pointer hover:bg-white p-2 rounded-sm mb-2.5">
+                        <i class="fa-solid fa-user text-lg text-main mr-2.5"></i>
+                        <span x-show="open" x-transition.duration.100ms
+                              class="font-medium text-slate-800 text-sm relative whitespace-nowrap">Profil</span>
+                    </a>
+                </li>
+            </ul>
             <form method="POST" class="flex" action="{{ route('logout') }}">
                 @csrf
                 <a class="w-full bg-main text-white font-semibold py-1.5 text-center rounded-sm hover:bg-main-light"

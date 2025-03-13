@@ -3,7 +3,7 @@
 <li x-data="{showSubMenu: false}" @mouseover="showSubMenu = true" @mouseleave="showSubMenu = false"
     class="relative">
     <a href="{{isset($href) ? $href : '#'}}"
-       class="flex items-center cursor-pointer hover:bg-white px-2 h-10 rounded-md mb-2.5">
+       class="flex items-center cursor-pointer hover:bg-white px-2 h-10 rounded-sm mb-2.5">
         @if(isset($icon))
             <span class="w-4 h-4 mr-4 grid place-content-center">
                 <i class="{{$icon}} text-xl text-main"></i>
