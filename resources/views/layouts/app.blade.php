@@ -7,9 +7,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -24,7 +26,7 @@
 </head>
 <body class="font-sans antialiased">
 <x-toast/>
-<div class="min-h-screen bg-gray-50 flex">
+<div class="min-h-screen bg-neutral-50 flex">
     @include('layouts.sidebar')
     <div class="w-full">
         @include('layouts.header')
