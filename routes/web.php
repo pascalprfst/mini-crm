@@ -19,8 +19,7 @@ Route::middleware('auth')->group(function () {
         return view('import-export');
     })->name('import-export');
 
-    Route::get('/customers', [CustomerController::class, 'create'])->name('customers.create');
-    Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
+    Route::resource('customers', CustomerController::class)->only('index', 'show', 'create', 'store');
 
     Route::get('/contacts', [ContactController::class, 'create'])->name('contacts.create');
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');

@@ -1,7 +1,8 @@
 <div x-data="{menuOpen: false}"
-     class="h-10 border-b border-neutral-300 bg-neutral-100 shadow-sm flex justify-end items-center py-2 px-6">
+     class="h-10 border-b border-slate-300 bg-slate-100 shadow-sm flex justify-end items-center py-2 px-6">
+    <i class="fa-solid fa-bell mr-2 text-main cursor-pointer hover:text-main-light"></i>
     <div @click="menuOpen = !menuOpen"
-         class="text-sm text-neutral-500 pl-2 border-l border-neutral-300 cursor-pointer hover:text-neutral-600">
+         class="text-sm text-slate-500 pl-2 border-l border-slate-300 cursor-pointer hover:text-slate-600">
         <span class="relative -top-px">
             {{Auth::user()->email}}
         </span>

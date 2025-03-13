@@ -1,5 +1,7 @@
 import './bootstrap';
 
+import './alpine.js';
+
 import '@fortawesome/fontawesome-free/css/fontawesome.css';
 import '@fortawesome/fontawesome-free/css/regular.css';
 import '@fortawesome/fontawesome-free/css/solid.css';

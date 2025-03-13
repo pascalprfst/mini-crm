@@ -15,7 +15,7 @@
     @if(!$slot->isEmpty())
         <div x-show="showSubMenu"
              class="w-72 h-28 px-5 absolute top-0 right-0 translate-x-full cursor-pointer">
-            <div class="w-full h-full bg-neutral-100 border border-neutral-200 rounded-sm">
+            <div class="w-full h-full bg-slate-100 border border-slate-200 rounded-sm">
                 {{$slot}}
             </div>
         </div>

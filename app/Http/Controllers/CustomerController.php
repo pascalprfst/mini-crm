@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCustomerRequest;
+use App\Models\Customer;
 use App\Models\CustomerFieldSetting;
 use App\Models\FormTemplate;
 use App\Services\CustomerService;
@@ -11,9 +12,11 @@ use Illuminate\View\View;
 
 class CustomerController extends Controller
 {
-    public function index(): void
+    public function index(): View
     {
-
+        return view('customer.index', [
+            'customers' => Customer::all(),
+        ]);
     }
 
     public function create(): View

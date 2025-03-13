@@ -26,7 +26,7 @@
 </head>
 <body class="font-sans antialiased">
 <x-toast/>
-<div class="min-h-screen bg-neutral-50 flex">
+<div class="min-h-screen bg-slate-50 flex">
     @include('layouts.sidebar')
     <div class="w-full">
         @include('layouts.header')
