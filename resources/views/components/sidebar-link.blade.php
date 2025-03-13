@@ -9,7 +9,8 @@
                 <i class="{{$icon}} text-xl text-main"></i>
             </span>
         @endif
-        <span x-show="open" x-transition.duration.100ms class="font-medium relative">{{$label}}</span>
+        <span x-show="open" x-transition.duration.100ms
+              class="font-medium text-slate-800 text-base relative whitespace-nowrap">{{$label}}</span>
     </a>
 
     @if(!$slot->isEmpty())

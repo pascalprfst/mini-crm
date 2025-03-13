@@ -12,11 +12,11 @@ use Illuminate\View\View;
 
 class CustomerController extends Controller
 {
-    public function index(): View
+    
+    public function show(Customer $customer): View
     {
-        return view('customer.index', [
-            'fields' => CustomerFieldSetting::where('active', true)->get()->toArray(),
-            'customers' => Customer::all(),
+        return view('customer.show', [
+            'customer' => $customer,
         ]);
     }
 

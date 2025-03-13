@@ -8,26 +8,10 @@
         <ul>
             <x-sidebar-link icon="fa-solid fa-house" label="Dashboard" href="{{route('dashboard')}}"></x-sidebar-link>
             <x-sidebar-link icon="fa-solid fa-building" label="Kunden" href="{{route('dashboard')}}"></x-sidebar-link>
-
-            <li>
-                <a class="flex items-center cursor-pointer hover:bg-slate-50 px-2 h-10 rounded-md mb-2.5">
-                    <span class="w-4 h-4 mr-4 grid place-content-center">
-                        <i class="fa-solid fa-address-book text-xl text-main"></i>
-                    </span>
-                    <span x-show="open" x-transition.duration.100ms class="font-medium relative">Kotakte</span>
-                </a>
-            </li>
-
-
-            <li>
-                <a class="flex items-center cursor-pointer hover:bg-slate-50 px-2 h-10 rounded-md mb-2.5">
-                    <span class="w-4 h-4 mr-4 grid place-content-center">
-                        <i class="fa-solid fa-database text-xl text-main"></i>
-                    </span>
-                    <span x-show="open" x-transition.duration.100ms
-                          class="font-medium relative whitespace-nowrap">Import & Export</span>
-                </a>
-            </li>
+            <x-sidebar-link icon="fa-solid fa-address-book" label="Kontakte"
+                            href="{{route('dashboard')}}"></x-sidebar-link>
+            <x-sidebar-link icon="fa-solid fa-address-book" label="Import & Export"
+                            href="{{route('dashboard')}}"></x-sidebar-link>
             <x-sidebar-link icon="fa-solid fa-hammer" label="Datenmodellierung">
             </x-sidebar-link>
 

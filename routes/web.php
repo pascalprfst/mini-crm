@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\CustomerList;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,7 +20,8 @@ Route::middleware('auth')->group(function () {
         return view('import-export');
     })->name('import-export');
 
-    Route::resource('customers', CustomerController::class)->only('index', 'show', 'create', 'store');
+    Route::get('/customers', CustomerList::class)->name('customers.index');
+    Route::resource('customers', CustomerController::class)->only('show', 'create', 'store');
 
     Route::get('/contacts', [ContactController::class, 'create'])->name('contacts.create');
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
