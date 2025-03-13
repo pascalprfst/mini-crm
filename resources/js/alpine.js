@@ -28,6 +28,11 @@ Alpine.data('addNewField', ($wire) => ({
     },
 }))
 
+Alpine.data('labelGenerator', ($wire) => ({
+    edit: false,
+    add: true,
+}))
+
 Alpine.data('formBuilder', ($wire) => ({
     open: false,
     columns: $wire.entangle('columns'),

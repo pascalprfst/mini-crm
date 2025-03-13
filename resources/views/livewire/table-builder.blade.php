@@ -14,12 +14,14 @@
 
         <p class="text-slate-600 w-full p-2.5 border border-slate-300 rounded-md font-light mb-6">
             <i class="fa-solid fa-circle-info text-slate-600"></i>
-            Ziehe mit dem <i class="fa-solid fa-compress text-main "></i> Icon die Spalten an die gewünschte Position.
+            Ziehe mit dem <i class="fa-solid fa-compress text-main "></i> Icon die Spalten an die gewünschte
+            Position.
             Über
             <span class="border border-slate-300 rounded-sm text-sm px-2.5">S</span> <span
                 class="border border-slate-300 rounded-sm text-sm px-2.5">M</span> und
             <span class="border border-slate-300 rounded-sm text-sm px-2.5">L</span> kannst du die
-            Spaltenbreite definieren. Mit einem Klick auf <i class="fa-solid fa-eye text-blue-600"></i> kannst du die
+            Spaltenbreite definieren. Mit einem Klick auf <i class="fa-solid fa-eye text-blue-600"></i> kannst du
+            die
             Spalte
             für diese
             Tabelle ausblenden.
