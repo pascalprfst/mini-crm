@@ -86,7 +86,7 @@ class ModelFormBuilder extends Component
         ]);
 
         $this->fieldSettings = $this->getFieldSettings();
-        
+
         $this->dispatch('close-modal', name: 'addCustomField');
     }
 
@@ -136,6 +136,6 @@ class ModelFormBuilder extends Component
 
     public function render(): View
     {
-        return view('livewire.model-form-builder');
+        return view('livewire.model-form-builder')->layout('layouts.app');
     }
 }

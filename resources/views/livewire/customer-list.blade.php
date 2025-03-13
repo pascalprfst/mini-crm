@@ -5,7 +5,7 @@
                    class="border border-slate-300 rounded-md py-1.5"/>
         </div>
     </div>
-    <div class="mb-4">
+    <div>
         <table class="rounded-md  text-sm text-left overflow-hidden w-full">
             <thead class="text-sm bg-black text-white">
             <tr>
@@ -39,5 +39,8 @@
             @endforeach
             </tbody>
         </table>
+        <div class="mt-6">
+            {{$customers->links()}}
+        </div>
     </div>
 </x-section>

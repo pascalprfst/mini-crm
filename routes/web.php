@@ -4,6 +4,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\CustomerList;
+use App\Livewire\ModelFormBuilder;
+use App\Livewire\TableBuilder;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,6 +27,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/contacts', [ContactController::class, 'create'])->name('contacts.create');
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
+
+    Route::get('/form-builder', ModelFormBuilder::class)->name('form-builder');
+    Route::get('/table-builder', TableBuilder::class)->name('table-builder');
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -20,7 +20,7 @@ class TableBuilder extends Component
         $this->getFields();
 
         $this->customers = Customer::all();
-        
+
     }
 
     public function updatedModel(): void
@@ -34,6 +34,6 @@ class TableBuilder extends Component
 
     public function render(): View
     {
-        return view('livewire.table-builder');
+        return view('livewire.table-builder')->layout('layouts.app');
     }
 }
