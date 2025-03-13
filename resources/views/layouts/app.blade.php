@@ -31,7 +31,7 @@
     <div class="w-full">
         @include('layouts.header')
 
-        <main class="py-6 px-8 overflow-y-auto h-[calc(100vh-48px)]">
+        <main class="py-6 px-8 overflow-y-auto  h-[calc(100vh-48px)]">
             {{ $slot }}
         </main>
     </div>

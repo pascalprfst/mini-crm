@@ -15,6 +15,7 @@ class CustomerController extends Controller
     public function index(): View
     {
         return view('customer.index', [
+            'fields' => CustomerFieldSetting::where('active', true)->get()->toArray(),
             'customers' => Customer::all(),
         ]);
     }

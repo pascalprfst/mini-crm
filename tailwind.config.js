@@ -25,7 +25,7 @@ export default {
                 'main': '#2e11af',
                 'main-light': '#4329b7',
                 'main-dark': '#290f9e',
-                'sub': '',
+                'sub': '#7d11af',
             }
         },
     },
