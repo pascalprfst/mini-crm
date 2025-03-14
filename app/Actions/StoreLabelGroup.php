@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-class SaveDropdown
+class StoreLabelGroup
 {
     /**
      * Create a new class instance.

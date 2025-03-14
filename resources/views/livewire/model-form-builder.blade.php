@@ -30,17 +30,17 @@
                                 <div>
                                     <span class="text-slate-800 text-sm">Anordnung</span>
 
-                                    <div class="bg-slate-100 flex border border-slate-300 max-w-fit rounded-md">
+                                    <div class="bg-slate-100 flex border border-slate-300 max-w-fit rounded-sm">
                                         <div @click="changeColumns(1)"
-                                             class="grid place-content-center px-4 py-0.5 rounded-l-md font-medium cursor-pointer hover:bg-slate-200">
+                                             class="grid place-content-center px-4 py-0.5 font-medium cursor-pointer hover:bg-slate-200 relative ">
                                             |
                                         </div>
                                         <div @click="changeColumns(2)"
-                                             class="grid place-content-center px-4 py-0.5 font-medium border-x border-slate-300 cursor-pointer hover:bg-slate-200">
+                                             class="grid place-content-center px-4 py-0.5 font-medium border-x border-slate-300 cursor-pointer hover:bg-slate-200 relative ">
                                             ||
                                         </div>
                                         <div @click="changeColumns(3)"
-                                             class="grid place-content-center px-4 py-0.5 rounded-r-md font-medium cursor-pointer hover:bg-slate-200">
+                                             class="grid place-content-center px-4 py-0.5 font-medium cursor-pointer hover:bg-slate-200 relative ">
                                             |||
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
 
                             </div>
                             <div class="ml-auto">
-                                <x-primary-button>Vorlage speichern</x-primary-button>
+                                <x-primary-button class="text-sm">Vorlage speichern</x-primary-button>
                             </div>
                         </div>
 
@@ -141,6 +141,8 @@
 
             <div x-show="add">
                 <h4 class="font-medium text-slate-800 text-base mb-2">Gruppe erstellen</h4>
+
+                <x-input label="Gruppenname" id="groupname" name="groupname"/>
             </div>
         </x-section>
     </div>

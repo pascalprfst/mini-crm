@@ -12,6 +12,8 @@ return new class extends Migration {
     {
         Schema::create('labels', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
             $table->string('model_type');
             $table->json('values');
             $table->timestamps();

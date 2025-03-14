@@ -19,6 +19,7 @@ export default {
                 lg: '17px',
                 base: '15px',
                 sm: '13px',
+                xs: '11px',
             },
 
             colors: {

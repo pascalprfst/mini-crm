@@ -18,7 +18,7 @@
                 <a href="{{route('profile.edit')}}"
                    class="flex items-center cursor-pointer hover:bg-white p-2 rounded-sm mb-2.5">
                     <i class="fa-solid fa-user text-lg text-main mr-2.5"></i>
-                    <span x-show="open" x-transition.duration.100ms
+                    <span x-show="menuOpen" x-transition.duration.100ms
                           class="font-medium text-slate-800 text-sm relative whitespace-nowrap">Profil</span>
                 </a>
             </li>
@@ -28,7 +28,7 @@
                 <a href="{{route('profile.edit')}}"
                    class="flex items-center cursor-pointer hover:bg-white p-2 rounded-sm mb-2.5">
                     <i class="fa-solid fa-lock text-lg text-main mr-2.5"></i>
-                    <span x-show="open" x-transition.duration.100ms
+                    <span x-show="menuOpen" x-transition.duration.100ms
                           class="font-medium text-slate-800 text-sm relative whitespace-nowrap">Adminbereich</span>
                 </a>
             </li>
@@ -36,7 +36,7 @@
         <form method="POST" class="flex" action="{{ route('logout') }}">
             @csrf
             <a class="w-full bg-main text-white font-semibold py-1.5 text-center text-sm rounded-sm hover:bg-main-light cursor-pointer"
-               :href="route('logout')"
+               x-bind:href="'{{ route('logout') }}'"
                onclick="event.preventDefault();
                     this.closest('form').submit();">
                 <i class="fa-solid fa-right-from-bracket relative mr-1 top-px"></i>

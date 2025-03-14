@@ -1,4 +1,4 @@
-<div x-data="{open: true}" x-cloak :class="open ? 'w-72' : 'w-12'"
+<div x-data="{open: $persist(true)}" x-cloak :class="open ? 'w-72' : 'w-12'"
      class="h-screen bg-slate-50 relative transition-all duration-200 ease-in-out border-r border-r-slate-300 shadow-sm">
     <i @click="open = !open"
        :class="!open ? 'rotate-180' : 'rotate-0'"
