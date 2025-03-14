@@ -31,6 +31,25 @@ Alpine.data('addNewField', ($wire) => ({
 Alpine.data('labelGenerator', ($wire) => ({
     edit: false,
     add: true,
+    options: [],
+
+    init() {
+        this.options.push({
+            value: '',
+        })
+    },
+
+    addOption() {
+        this.options.push({
+            value: '',
+        })
+    },
+
+    removeOption(index) {
+        this.options.splice(index, 1);
+        console.log(this.options);
+    }
+
 }))
 
 Alpine.data('formBuilder', ($wire) => ({

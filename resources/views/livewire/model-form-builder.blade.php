@@ -131,18 +131,48 @@
 
             <div x-show="edit">
                 <h4 class="font-medium text-slate-800 text-base mb-2">Gruppe bearbeiten</h4>
-                <label for="model" class="text-sm font-medium text-slate-600">Label Gruppe</label>
-                <div>
-                    <select class="w-full border-slate-300 px-2 py-1.5 rounded-sm cursor-pointer text-base">
-                        <option disabled selected value="">Label Gruppe auswählen</option>
-                    </select>
-                </div>
+                <x-select label="Gruppe auswählen" name="group" id="group">
+                    <option disabled selected value="">Gruppe auswählen</option>
+                </x-select>
             </div>
 
             <div x-show="add">
-                <h4 class="font-medium text-slate-800 text-base mb-2">Gruppe erstellen</h4>
+                <h4 class="font-medium text-slate-700 text-base mb-2">Gruppe erstellen</h4>
 
-                <x-input label="Gruppenname" id="groupname" name="groupname"/>
+                <x-input label="Gruppenname" id="groupname" name="groupname" required/>
+
+                <div class="mt-1.5">
+                    <x-select label="Objekt auswählen" name="model" id="model">
+                        <option disabled selected value="">Objekt auswählen</option>
+                        <option value="customer">Kunden</option>
+                        <option value="contact">Kontakte</option>
+                    </x-select>
+                </div>
+
+                <div class="mt-4">
+                    <h5 class="text-slate-700 text-base mb-2">Optionen</h5>
+
+                    <template x-for="(option, index) in options" :key="index">
+                        <div class="mb-2 flex items-center">
+                            <div class="w-full">
+                                <x-input x-bind:placeholder="'Option ' + (index +1)" x-model="options[index].value"/>
+                            </div>
+                            <i @click="removeOption(index) "
+                               class="fa-solid fa-circle-xmark text-lg text-red-600 hover:text-red-500 ml-2 cursor-pointer"></i>
+                        </div>
+                    </template>
+
+                    <div
+                        @click="addOption"
+                        class="border border-slate-300 bg-slate-100 rouned-sm text-sm mt-4 text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
+                        <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
+                        <span class="relative -top-px">Option hinzufügen</span>
+                    </div>
+
+                    <div class="mt-4">
+                        <x-primary-button class="w-full flex justify-center">Gruppe speichern</x-primary-button>
+                    </div>
+                </div>
             </div>
         </x-section>
     </div>
