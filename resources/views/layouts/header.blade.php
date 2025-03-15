@@ -11,7 +11,7 @@
     </div>
 
     <div x-show="menuOpen" x-collapse @click.away="menuOpen = false"
-         class="w-60 bg-slate-100 border border-slate-300 rounded-sm shadow-sm px-4 py-2.5 absolute right-6 top-12">
+         class="w-60 bg-slate-100 border border-slate-300 rounded-md shadow-sm px-4 py-2.5 absolute right-6 top-12">
         <ul>
             <li
                 class="relative">

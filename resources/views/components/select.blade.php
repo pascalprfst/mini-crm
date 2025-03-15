@@ -13,7 +13,7 @@
     @endif
     <div>
         <select
-            name="{{$name}}" {{$id}} {{ $attributes->merge(['class' => 'rounded-sm py-1.5 border border-slate-300 text-sm w-full']) }}>
+            name="{{$name}}" {{$id}} {{ $attributes->merge(['class' => 'rounded-sm py-1.5 border border-slate-300 text-base w-full']) }}>
             {{$slot}}
         </select>
     </div>

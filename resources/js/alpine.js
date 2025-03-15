@@ -32,6 +32,8 @@ Alpine.data('labelGenerator', ($wire) => ({
     edit: false,
     add: true,
     options: [],
+    errors: [],
+    groupname: '',
 
     init() {
         this.options.push({
@@ -47,7 +49,18 @@ Alpine.data('labelGenerator', ($wire) => ({
 
     removeOption(index) {
         this.options.splice(index, 1);
-        console.log(this.options);
+    },
+
+    submitGroup() {
+        if (this.options.length === 0) {
+            return;
+        }
+
+        $wire.saveLabelGroup({
+            name: this.groupname,
+            modelType: 'all',
+            options: this.options
+        });
     }
 
 }))

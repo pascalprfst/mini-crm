@@ -63,7 +63,7 @@
                         </div>
 
                         <ul x-sort :style="'grid-template-columns: repeat(' + columns + ', 1fr)'"
-                            class="grid gap-4">
+                            class="grid gap-4 mb-2">
                             @foreach($fieldSettings as $setting)
                                 <li>
                                     <div @if($setting->active)
@@ -101,14 +101,10 @@
                                 </li>
                             @endforeach
                         </ul>
+                        <hr>
+                        <h4 class="font-medium text-slate-800 text-base mb-2">Label Gruppen</h4>
                     </form>
                 @endif
-                {{--
-                @if(count($settings) === 0)
-                    <div class="flex justify-center py-6">
-                        <em class="text-slate-400">Es wurden noch keine Felder hinzugefügt.</em>
-                    </div>
-                @endif--}}
             </div>
         </x-section>
 
@@ -139,40 +135,45 @@
             <div x-show="add">
                 <h4 class="font-medium text-slate-700 text-base mb-2">Gruppe erstellen</h4>
 
-                <x-input label="Gruppenname" id="groupname" name="groupname" required/>
+                <form @submit.prevent="submitGroup">
+                    <x-input label="Gruppenname" id="groupname" name="groupname" x-model="groupname" required/>
 
-                <div class="mt-1.5">
-                    <x-select label="Objekt auswählen" name="model" id="model">
-                        <option disabled selected value="">Objekt auswählen</option>
-                        <option value="customer">Kunden</option>
-                        <option value="contact">Kontakte</option>
-                    </x-select>
-                </div>
-
-                <div class="mt-4">
-                    <h5 class="text-slate-700 text-base mb-2">Optionen</h5>
-
-                    <template x-for="(option, index) in options" :key="index">
-                        <div class="mb-2 flex items-center">
-                            <div class="w-full">
-                                <x-input x-bind:placeholder="'Option ' + (index +1)" x-model="options[index].value"/>
-                            </div>
-                            <i @click="removeOption(index) "
-                               class="fa-solid fa-circle-xmark text-lg text-red-600 hover:text-red-500 ml-2 cursor-pointer"></i>
-                        </div>
-                    </template>
-
-                    <div
-                        @click="addOption"
-                        class="border border-slate-300 bg-slate-100 rouned-sm text-sm mt-4 text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
-                        <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
-                        <span class="relative -top-px">Option hinzufügen</span>
+                    <div class="mt-1.5">
+                        <x-select label="Objekt auswählen" name="model" id="model">
+                            <option disabled selected value="">Objekt auswählen</option>
+                            <option value="alle">Alle</option>
+                            <option value="customer">Kunden</option>
+                            <option value="contact">Kontakte</option>
+                        </x-select>
                     </div>
 
                     <div class="mt-4">
-                        <x-primary-button class="w-full flex justify-center">Gruppe speichern</x-primary-button>
+                        <h5 class="text-slate-700 text-base mb-2">Optionen</h5>
+
+                        <template x-for="(option, index) in options" :key="index">
+                            <div class="mb-2 flex items-center">
+                                <div class="w-full">
+                                    <x-input x-bind:placeholder="'Option ' + (index +1)"
+                                             x-model="options[index].value"/>
+                                </div>
+                                <i @click="removeOption(index) "
+                                   class="fa-solid fa-circle-xmark text-lg text-red-600 hover:text-red-500 ml-2 cursor-pointer"></i>
+                            </div>
+                        </template>
+
+                        <div
+                            @click="addOption"
+                            class="border border-slate-300 bg-slate-100 rouned-sm text-sm mt-4 text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
+                            <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
+                            <span class="relative -top-px">Option hinzufügen</span>
+                        </div>
+
+                        <div class="mt-4">
+                            <x-primary-button class="w-full flex justify-center">Gruppe speichern
+                            </x-primary-button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </x-section>
     </div>
