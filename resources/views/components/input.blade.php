@@ -3,7 +3,7 @@
 <div>
     @if($label)
         <div class="relative">
-            <label class="text-slate-700 text-sm" for="{{$id}}">
+            <label class="text-slate-800 text-sm" for="{{$id}}">
                 {{$label}}
                 @if($required)
                     <span class="text-red-600 relative -left-0.5">*</span>

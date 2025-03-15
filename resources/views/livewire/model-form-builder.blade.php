@@ -8,9 +8,10 @@
     </div>
 
     <div class="flex flex-col xl:flex-row gap-8">
-
         <x-section class="w-full max-h-max" heading="Formular & Objekt Builder">
             <div>
+                <h4 class="font-medium text-slate-800 text-base mb-2">Formular</h4>
+
                 <div class="w-1/2 mb-6">
                     <div>
                         <x-select label="Objekt" id="model" name="model" wire:model.live="model" @change="error = ''">
@@ -44,11 +45,10 @@
                                     </div>
                                 </div>
 
-                                <div @click="$dispatch('open-modal', {name: 'addCustomField'})"
-                                     class="text-sm text-slate-500 font-medium items-center flex justify-center cursor-pointer py-1.5 hover:text-slate-700">
-                                    <i class="fa-solid fa-plus text-lg font-medium mr-1.5"></i>
+                                <x-sub-button @click="$dispatch('open-modal', {name: 'addCustomField'})">
+                                    <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
                                     Neues Feld hinzufügen
-                                </div>
+                                </x-sub-button>
 
                                 <template x-if="error">
                                     <div class="text-red-500 text-sm py-1.5" x-text="error"></div>
@@ -70,18 +70,24 @@
                                          class="{{!$setting->active ? 'bg-red-100' : 'bg-slate-100 cursor-grab'}}  p-1.5 rounded-md border-2 border-dotted border-slate-300 relative">
                                         <div class="absolute right-2.5 top-2 flex items-center gap-x-2">
                                             @if($setting->required)
+                                                <span
+                                                    class="text-xs text-white bg-amber-500 px-1.5 py-0.5 rounded-md">{{__('app-builder.required')}}</span>
                                                 <i class="fa-solid fa-triangle-exclamation text-slate-800 font-bold"></i>
                                             @endif
                                             <i @click="$dispatch('open-modal', {name: 'editCustomField',  data: '12345' })"
                                                class="fa-solid fa-pencil text-slate-800 cursor-pointer"></i>
-                                            @if($setting->active)
-                                                <i wire:click="toggleFieldStatus({{$setting->id}})"
-                                                   class="fa-solid fa-ban text-red-500 cursor-pointer"></i>
-                                            @else
-                                                <i wire:click="toggleFieldStatus({{$setting->id}})"
-                                                   class="fa-solid fa-check text-green-500 cursor-pointer"></i>
+                                            @if(!$setting->locked)
+                                                @if($setting->active)
+                                                    <i wire:click="toggleFieldStatus({{$setting->id}})"
+                                                       class="fa-solid fa-ban text-red-500 cursor-pointer"></i>
+                                                @else
+                                                    <i wire:click="toggleFieldStatus({{$setting->id}})"
+                                                       class="fa-solid fa-check text-green-500 cursor-pointer"></i>
+                                                @endif
                                             @endif
-                                            <i class="fa-solid fa-trash-can text-red-500 cursor-pointer"></i>
+                                            @if($setting->locked)
+                                                <i class="fa-solid fa-lock text-slate-800"></i>
+                                            @endif
                                         </div>
                                         <div>
                                             <div class="text-sm text-slate-500">
@@ -109,18 +115,14 @@
         <x-section x-data="labelGenerator($wire)" class="w-full xl:max-w-96 max-h-max" heading="Label Generator">
 
             <div class="grid grid-cols-2 gap-x-4 mb-3">
-                <div
-                    @click="add = true; edit = false;"
-                    class="border border-slate-300 bg-slate-100 rounded-md text-sm text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
+                <x-sub-button @click="add = true; edit = false;">
                     <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
                     Gruppe erstellen
-                </div>
-                <div
-                    @click="edit = true; add = false;"
-                    class="border border-slate-300 bg-slate-100 rounded-md text-sm text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
+                </x-sub-button>
+                <x-sub-button @click="edit = true; add = false;">
                     <i class="fa-solid fa-edit text-slate-800 font-semibold"></i>
                     Gruppe bearbeiten
-                </div>
+                </x-sub-button>
             </div>
 
             <div x-show="edit">
@@ -131,7 +133,7 @@
             </div>
 
             <div x-show="add">
-                <h4 class="font-medium text-slate-700 text-base mb-2">Gruppe erstellen</h4>
+                <h4 class="font-medium text-slate-800 text-base mb-2">Gruppe erstellen</h4>
 
                 <form @submit.prevent="submitGroup">
                     <x-input label="Gruppenname" id="groupname" name="groupname" x-model="groupname" required/>
@@ -146,7 +148,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <h5 class="text-slate-700 text-base mb-2">Optionen</h5>
+                        <h5 class="text-slate-800 text-base mb-2">Optionen</h5>
 
                         <template x-for="(option, index) in options" :key="index">
                             <div class="mb-2 flex items-center">
@@ -159,12 +161,10 @@
                             </div>
                         </template>
 
-                        <div
-                            @click="addOption"
-                            class="border border-slate-300 bg-slate-100 rounded-md text-sm mt-4 text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
+                        <x-sub-button @click="addOption">
                             <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
-                            <span class="relative -top-px">Option hinzufügen</span>
-                        </div>
+                            <span>Option hinzufügen</span>
+                        </x-sub-button>
 
                         <div class="mt-4">
                             <x-primary-button class="w-full flex justify-center">Gruppe speichern

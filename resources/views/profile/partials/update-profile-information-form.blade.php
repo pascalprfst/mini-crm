@@ -17,33 +17,34 @@
         @csrf
         @method('patch')
 
-        <!-- Profile Picture -->
         <div class="flex flex-col items-center space-y-4">
             <div class="relative group">
                 <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-100">
-                    <img id="preview-image" 
-                         src="{{ $user->avatar_url ?? asset('images/default-avatar.png') }}" 
-                         alt="Profilbild" 
-                         class="w-full h-full object-cover">
+                    <img id="preview-image"
+                         src="{{ $user->avatar_url ?? '/assets/placeholder-avatar.png' }}"
+                         alt="Profilbild"
+                         class="w-full h-full object-cover bg-white">
                 </div>
-                <label for="photo" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 rounded-full cursor-pointer transition-all duration-200">
+                <label for="photo"
+                       class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 rounded-full cursor-pointer transition-all duration-200">
                     <span>Foto ändern</span>
                 </label>
-                <input type="file" 
-                       id="photo" 
-                       name="photo" 
-                       accept="image/*" 
+                <input type="file"
+                       id="photo"
+                       name="photo"
+                       accept="image/*"
                        class="hidden"
                        onchange="previewImage(event)">
             </div>
             <p class="text-sm text-gray-500">Klicken Sie hier, um ein neues Foto hochzuladen</p>
         </div>
 
-    
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 <x-input-label for="name" :value="__('Name')"/>
-                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)"
+                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"
+                              :value="old('name', $user->name)"
                               required autofocus autocomplete="name"/>
                 <x-input-error class="mt-2" :messages="$errors->get('name')"/>
             </div>
@@ -92,24 +93,24 @@
 </div>
 
 <script>
-function previewImage(event) {
-    const input = event.target;
-    const preview = document.getElementById('preview-image');
-    
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        
-        reader.onload = function(e) {
-            preview.src = e.target.result;
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById('preview-image');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            }
+
+            reader.readAsDataURL(input.files[0]);
         }
-        
-        reader.readAsDataURL(input.files[0]);
     }
-}
 </script>
 
 <style>
-.group:hover .group-hover\:opacity-100 {
-    opacity: 1;
-}
+    .group:hover .group-hover\:opacity-100 {
+        opacity: 1;
+    }
 </style>
