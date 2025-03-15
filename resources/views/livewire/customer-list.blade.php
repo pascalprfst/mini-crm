@@ -1,14 +1,12 @@
 <x-section heading="Kundenübersicht">
-    <div class="mt-2 mb-4 flex">
-        <div>
-            <input type="text" id="search" name="search" wire:model.live.debounce="search" placeholder="Suche..."
-                   class="border border-slate-300 py-1.5"/>
-        </div>
-
-        <a href="{{route('customers.create')}}"
-           class="border border-slate-300 bg-slate-100 rouned-sm text-sm text-slate-800 text-center py-1.5 px-2.5 ml-auto flex justify-center items-center  hover:bg-slate-200 cursor-pointer">
-            <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
-            <span class="ml-1.5">Kunden anlegen</span>
+    <div class="mt-2 mb-4 flex items-end">
+        <x-input type="text" id="search" name="search" wire:model.live.debounce="search" placeholder="Suche..."/>
+        
+        <a href="{{route('customers.create')}}" class="ml-auto">
+            <x-sub-button>
+                <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
+                <span class="ml-1.5">Kunden anlegen</span>
+            </x-sub-button>
         </a>
     </div>
     <div>

@@ -4,9 +4,9 @@
     class="relative">
     <a href="{{isset($href) ? $href : '#'}}"
         @class([
-            'flex items-center cursor-pointer px-2 h-10 rounded-sm mb-2.5 transition-colors duration-150',
+            'flex items-center cursor-pointer px-2 h-10 rounded-md mb-2.5 transition-colors duration-150',
             'bg-slate-100' => $active,
-            'hover:bg-white' => !$active
+            'hover:bg-slate-200' => !$active
         ])>
         @if(isset($icon))
             <span class="w-4 h-4 mr-4 grid place-content-center">
