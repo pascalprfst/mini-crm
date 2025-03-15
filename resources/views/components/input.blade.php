@@ -13,7 +13,7 @@
     @endif
     <div>
         <input
-            name="{{$name}}" {{$id}} {{$required ? 'required' : ''}} {{ $attributes->merge(['class' => 'rounded-sm py-1.5 border border-slate-300 text-sm w-full']) }}/>
+            name="{{$name}}" {{$id}} {{$required ? 'required' : ''}} {{ $attributes->merge(['class' => 'rounded-sm py-2 border border-slate-300 text-base w-full']) }}/>
     </div>
 
     <div>

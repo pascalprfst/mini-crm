@@ -7,11 +7,50 @@
     <nav class="mt-16 px-2">
         <ul>
             <x-sidebar-link icon="fa-solid fa-house" label="Dashboard" href="{{route('dashboard')}}"></x-sidebar-link>
-            <x-sidebar-link icon="fa-solid fa-building" label="Kunden" href="{{route('dashboard')}}"></x-sidebar-link>
+            <x-sidebar-link icon="fa-solid fa-building" label="Kunden" href="{{route('dashboard')}}">
+                <a href="{{route('customers.index')}}"
+                   class="flex items-center cursor-pointer hover:bg-white px-2 h-8 rounded-sm mb">
+                    <span
+                        class="font-medium text-slate-800 text-base relative whitespace-nowrap">Kunden</span>
+                </a>
+                <a href="{{route('customers.create')}}"
+                   class="flex items-center cursor-pointer hover:bg-white px-2 h-8 rounded-sm mb">
+                    <span
+                        class="font-medium text-slate-800 text-base relative whitespace-nowrap">Kunden anlegen</span>
+                </a>
+            </x-sidebar-link>
             <x-sidebar-link icon="fa-solid fa-address-book" label="Kontakte"
-                            href="{{route('dashboard')}}"></x-sidebar-link>
+                            href="{{route('dashboard')}}">
+                <a href="{{route('customers.index')}}"
+                   class="flex items-center cursor-pointer hover:bg-white px-2 h-8 rounded-sm mb">
+                    <span
+                        class="font-medium text-slate-800 text-base relative whitespace-nowrap">Kontakte</span>
+                </a>
+                <a href="{{route('customers.create')}}"
+                   class="flex items-center cursor-pointer hover:bg-white px-2 h-8 rounded-sm mb">
+                    <span
+                        class="font-medium text-slate-800 text-base relative whitespace-nowrap">Kontakt anlegen</span>
+                </a>
+            </x-sidebar-link>
+
             <x-sidebar-link icon="fa-solid fa-database" label="Import & Export"
-                            href="{{route('dashboard')}}"></x-sidebar-link>
+                            href="{{route('dashboard')}}">
+                <a href="{{route('customers.index')}}"
+                   class="flex items-center cursor-pointer hover:bg-white px-2 h-8 rounded-sm mb">
+                    <span
+                        class="font-medium text-slate-800 text-base relative whitespace-nowrap">Import</span>
+                </a>
+                <a href="{{route('customers.create')}}"
+                   class="flex items-center cursor-pointer hover:bg-white px-2 h-8 rounded-sm mb">
+                    <span
+                        class="font-medium text-slate-800 text-base relative whitespace-nowrap">Export</span>
+                </a>
+                <a href="{{route('customers.create')}}"
+                   class="flex items-center cursor-pointer hover:bg-white px-2 h-8 rounded-sm mb">
+                    <span
+                        class="font-medium text-slate-800 text-base relative whitespace-nowrap">Meine Importe & Exporte</span>
+                </a>
+            </x-sidebar-link>
 
             <x-sidebar-link icon="fa-solid fa-hammer" label="App Builder">
                 <a href="{{route('form-builder')}}"

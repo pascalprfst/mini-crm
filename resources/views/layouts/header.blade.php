@@ -11,7 +11,7 @@
     </div>
 
     <div x-show="menuOpen" x-collapse @click.away="menuOpen = false"
-         class="w-60 bg-slate-100 border border-slate-300 rounded-md shadow-sm px-4 py-2.5 absolute right-6 top-12">
+         class="w-60 bg-slate-50 shadow-sm rounded-md overflow-hidden border border-slate-200 px-4 py-2.5 absolute right-6 top-12">
         <ul>
             <li
                 class="relative">
@@ -35,7 +35,7 @@
         </ul>
         <form method="POST" class="flex" action="{{ route('logout') }}">
             @csrf
-            <a class="w-full bg-main text-white font-semibold py-1.5 text-center text-sm rounded-sm hover:bg-main-light cursor-pointer"
+            <a class="w-full bg-main text-white font-semibold py-1.5 text-center text-sm rounded-md hover:bg-main-light cursor-pointer"
                x-bind:href="'{{ route('logout') }}'"
                onclick="event.preventDefault();
                     this.closest('form').submit();">

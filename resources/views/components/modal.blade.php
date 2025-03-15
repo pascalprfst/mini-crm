@@ -21,7 +21,7 @@
                x-transition:leave-end="translate-x-full"
                class="fixed h-screen bg-white right-0 z-50 w-2/6 shadow-md ">
             <i @click="show = false"
-               class="fa-regular text-2xl text-zinc-500 cursor-pointer absolute top-4 right-4 fa-circle-xmark"></i>
+               class="fa-regular text-2xl text-slate-500 cursor-pointer absolute top-4 right-4 fa-circle-xmark"></i>
             <div class="px-8 py-16">
                 {{$slot}}
             </div>
@@ -29,9 +29,9 @@
     @else
         <!-- Standard Modal -->
         <div x-show="show" x-transition
-             class="z-50 relative bg-background w-full max-w-lg p-6 shadow-md rounded-sm">
+             class="z-50 relative bg-white w-full max-w-lg pt-10 p-6 shadow-sm rounded-md">
             <i @click="show = false"
-               class="fa-solid text-lg text-zinc-500 cursor-pointer absolute top-4 right-4 fa-circle-xmark"></i>
+               class="fa-solid text-lg text-slate-500 cursor-pointer absolute top-4 right-4 fa-circle-xmark"></i>
             {{$slot}}
         </div>
     @endif
