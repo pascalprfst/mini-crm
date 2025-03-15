@@ -1,9 +1,15 @@
 <x-section heading="Kundenübersicht">
-    <div class="mt-2 mb-4">
+    <div class="mt-2 mb-4 flex">
         <div>
             <input type="text" id="search" name="search" wire:model.live.debounce="search" placeholder="Suche..."
-                   class="border border-slate-300 rounded-md py-1.5"/>
+                   class="border border-slate-300 py-1.5"/>
         </div>
+
+        <a href="{{route('customers.create')}}"
+           class="border border-slate-300 bg-slate-100 rouned-sm text-sm text-slate-800 text-center py-1.5 px-2.5 ml-auto flex justify-center items-center  hover:bg-slate-200 cursor-pointer">
+            <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
+            <span class="ml-1.5">Kunden anlegen</span>
+        </a>
     </div>
     <div>
         <table class="rounded-md  text-sm text-left overflow-hidden w-full">
