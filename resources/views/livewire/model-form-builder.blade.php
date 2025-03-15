@@ -12,14 +12,12 @@
         <x-section class="w-full max-h-max" heading="Formular & Objekt Builder">
             <div>
                 <div class="w-1/2 mb-6">
-                    <label for="model" class="text-sm font-medium text-slate-600">Objekt</label>
                     <div>
-                        <select id="model" name="model" wire:model.live="model" @change="error = ''"
-                                class="w-full text-base border-slate-300 px-2 py-1.5 rounded-sm cursor-pointer">
+                        <x-select label="Objekt" id="model" name="model" wire:model.live="model" @change="error = ''">
                             <option disabled selected value="">Objekt auswählen</option>
                             <option value="customer">Kunden</option>
                             <option value="contact">Kontakte</option>
-                        </select>
+                        </x-select>
                     </div>
                 </div>
 
@@ -113,13 +111,13 @@
             <div class="grid grid-cols-2 gap-x-4 mb-3">
                 <div
                     @click="add = true; edit = false;"
-                    class="border border-slate-300 bg-slate-100 rouned-sm text-sm text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
+                    class="border border-slate-300 bg-slate-100 rounded-md text-sm text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
                     <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
                     Gruppe erstellen
                 </div>
                 <div
                     @click="edit = true; add = false;"
-                    class="border border-slate-300 bg-slate-100 rouned-sm text-sm text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
+                    class="border border-slate-300 bg-slate-100 rounded-md text-sm text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
                     <i class="fa-solid fa-edit text-slate-800 font-semibold"></i>
                     Gruppe bearbeiten
                 </div>
@@ -163,7 +161,7 @@
 
                         <div
                             @click="addOption"
-                            class="border border-slate-300 bg-slate-100 rouned-sm text-sm mt-4 text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
+                            class="border border-slate-300 bg-slate-100 rounded-md text-sm mt-4 text-slate-800 text-center py-1.5 hover:bg-slate-200 cursor-pointer">
                             <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
                             <span class="relative -top-px">Option hinzufügen</span>
                         </div>
