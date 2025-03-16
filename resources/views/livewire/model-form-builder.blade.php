@@ -107,6 +107,22 @@
                         </ul>
                         <hr>
                         <h4 class="font-medium text-slate-800 text-base mb-2">Label Gruppen</h4>
+
+                        @if(count($labelGroups) > 0)
+                            <div class="flex flex-wrap gap-2.5">
+                                @foreach($labelGroups as $group)
+                                    <div
+                                        wire:click="toggleLabelGroup({{$group->id}})"
+                                        class="border border-slate-300 text-base rounded-md py-0.5 px-2.5 cursor-pointer">
+                                        {{$group->name}}
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="w-full py-4 flex justify-center">
+                                <em class="text-base text-slate-400">Es wurden noch keine Gruppe angelegt.</em>
+                            </div>
+                        @endif
                     </form>
                 @endif
             </div>
@@ -136,10 +152,11 @@
                 <h4 class="font-medium text-slate-800 text-base mb-2">Gruppe erstellen</h4>
 
                 <form @submit.prevent="submitGroup">
-                    <x-input label="Gruppenname" id="groupname" name="groupname" x-model="groupname" required/>
+                    <x-input label="Gruppenname" id="groupname" name="groupname" x-model="groupname" @input="validate"
+                             required/>
 
                     <div class="mt-1.5">
-                        <x-select label="Objekt auswählen" name="model" id="model">
+                        <x-select label="Objekt auswählen" name="model" id="model" x-model="model">
                             <option disabled selected value="">Objekt auswählen</option>
                             <option value="alle">Alle</option>
                             <option value="customer">Kunden</option>
@@ -153,7 +170,7 @@
                         <template x-for="(option, index) in options" :key="index">
                             <div class="mb-2 flex items-center">
                                 <div class="w-full">
-                                    <x-input x-bind:placeholder="'Option ' + (index +1)"
+                                    <x-input x-bind:placeholder="'Option ' + (index +1)" @input="validate"
                                              x-model="options[index].value"/>
                                 </div>
                                 <i @click="removeOption(index) "
@@ -167,7 +184,9 @@
                         </x-sub-button>
 
                         <div class="mt-4">
-                            <x-primary-button class="w-full flex justify-center">Gruppe speichern
+                            <x-primary-button x-bind:disabled="valid === false" class="w-full flex justify-center">
+                                Gruppe
+                                speichern
                             </x-primary-button>
                         </div>
                     </div>

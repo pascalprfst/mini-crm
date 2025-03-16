@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCustomerRequest;
 use App\Models\Customer;
 use App\Models\CustomerFieldSetting;
 use App\Models\FormTemplate;
+use App\Models\LabelGroup;
 use App\Services\CustomerService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -25,6 +26,7 @@ class CustomerController extends Controller
         return view('customer.create', [
             'fields' => CustomerFieldSetting::where('active', true)->get(),
             'formTemplate' => FormTemplate::where('model', 'CUSTOMER')->first(),
+            'labelGroups' => LabelGroup::where('model_type', 'customer')->orWhere('model_type', 'all')->get(),
         ]);
     }
 

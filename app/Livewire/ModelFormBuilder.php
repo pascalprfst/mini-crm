@@ -6,6 +6,7 @@ use App\Actions\CreateLabelGroup;
 use App\Classes\FieldTypes;
 use App\Models\CustomerFieldSetting;
 use App\Models\FormTemplate;
+use App\Models\LabelGroup;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -93,13 +94,6 @@ class ModelFormBuilder extends Component
         return $slug;
     }
 
-    private function renderBasicForm(): View
-    {
-        return view('components.forms.basic-form', [
-            'fieldTypes' => $this->fieldTypes,
-        ]);
-    }
-
     public function getFieldSettings(): Collection
     {
         $model = config('field-settings.' . $this->model);
@@ -142,17 +136,65 @@ class ModelFormBuilder extends Component
 
     public function saveLabelGroup(array $formData): void
     {
-        // Validieren
-        // Errors an Alpine mit Event senden
-        // In Alpine auf Errors hören
-        // Validierte Daten an Action geben
+        if (empty($formData['options']) || $formData['name'] === '' || $formData['modelType'] === '') {
+            return;
+        }
+
         $action = new CreateLabelGroup();
-        $action->handle($formData);
-        // LabelGroup speichern
+        $group = $action->handle($formData);
+
+        session()->flash('success', $group->name . ' wurde erfolgreich gespeichert.');
+        $this->redirect(route('form-builder'));
     }
 
+    /**
+     * @param LabelGroup $group
+     * @return void
+     */
+    public function toggleLabelGroup(LabelGroup $group): void
+    {
+        if (!LabelGroup::where('slug', $group->slug)->exists()) {
+            return;
+        }
+
+        $model = config('field-settings.' . $this->model);
+
+        if ($model::where('slug', $group->slug)->exists()) {
+            $field = $model::where('slug', $group->slug)->first();
+            $field->delete();
+            return;
+        }
+
+        $model::create([
+            'field_name' => $group->slug,
+            'field_type' => 'label',
+            'slug' => $group->slug,
+            'order' => $this->fieldSettings->count() + 1,
+            'label_field' => true,
+        ]);
+    }
+
+    /**
+     * @return View
+     */
+    private function renderBasicForm(): View
+    {
+        return view('components.forms.basic-form', [
+            'fieldTypes' => $this->fieldTypes,
+        ]);
+    }
+
+    /**
+     * @return View
+     */
     public function render(): View
     {
-        return view('livewire.model-form-builder')->layout('layouts.app');
+        $labelGroups = LabelGroup::where('model_type', $this->model)
+            ->orWhere('model_type', 'all')
+            ->get();
+
+        return view('livewire.model-form-builder', [
+            'labelGroups' => $labelGroups,
+        ])->layout('layouts.app');
     }
 }

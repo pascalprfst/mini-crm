@@ -3,9 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Customer;
-use App\Models\CustomField;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Livewire\Component;
 

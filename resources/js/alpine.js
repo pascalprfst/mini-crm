@@ -31,9 +31,11 @@ Alpine.data('addNewField', ($wire) => ({
 Alpine.data('labelGenerator', ($wire) => ({
     edit: false,
     add: true,
+    valid: false,
     options: [],
     errors: [],
     groupname: '',
+    model: '',
 
     init() {
         this.options.push({
@@ -45,23 +47,39 @@ Alpine.data('labelGenerator', ($wire) => ({
         this.options.push({
             value: '',
         })
+        this.validate();
     },
 
     removeOption(index) {
         this.options.splice(index, 1);
+        this.validate();
     },
 
     submitGroup() {
-        if (this.options.length === 0) {
+        if (!this.valid) {
             return;
         }
 
         $wire.saveLabelGroup({
             name: this.groupname,
-            modelType: 'all',
+            modelType: this.model,
             options: this.options
         });
-    }
+    },
+    
+    validate() {
+        if (this.groupname.trim() === '' || this.model.trim() === '') {
+            this.valid = false;
+            return;
+        }
+
+        if (this.options.length === 0 || this.options.some(option => option.value.trim() === '')) {
+            this.valid = false;
+            return;
+        }
+
+        this.valid = true;
+    },
 
 }))
 

@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->integer('order')->default(0);
             $table->boolean('required')->default(false);
             $table->boolean('active')->default(true);
+            $table->boolean('label_field')->default(false);
             $table->boolean('custom_field')->default(false);
             $table->timestamps();
         });

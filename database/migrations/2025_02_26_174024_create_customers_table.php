@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('email')->nullable();
             $table->string('website')->nullable();
             $table->text('description')->nullable();
-            $table->json('labels')->nullable();
+            $table->jsonb('label_fields')->nullable();
             $table->jsonb('custom_fields')->nullable();
             $table->timestamps();
         });
