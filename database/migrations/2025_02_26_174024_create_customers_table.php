@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('website')->nullable();
             $table->text('description')->nullable();
             $table->json('labels')->nullable();
-            $table->json('custom_fields')->nullable();
+            $table->jsonb('custom_fields')->nullable();
             $table->timestamps();
         });
     }

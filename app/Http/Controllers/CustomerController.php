@@ -12,7 +12,7 @@ use Illuminate\View\View;
 
 class CustomerController extends Controller
 {
-    
+
     public function show(Customer $customer): View
     {
         return view('customer.show', [

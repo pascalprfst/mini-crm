@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Actions\CreateLabelGroup;
 use App\Classes\FieldTypes;
 use App\Models\CustomerFieldSetting;
 use App\Models\FormTemplate;
@@ -35,7 +36,7 @@ class ModelFormBuilder extends Component
 
     public function selectForm(string $type): void
     {
-        $this->form = $type === 'select' 
+        $this->form = $type === 'select'
             ? view('components.forms.select-form', ['fieldTypes' => $this->fieldTypes])
             : $this->renderBasicForm();
     }
@@ -48,7 +49,7 @@ class ModelFormBuilder extends Component
 
         $model = config('field-settings.' . $this->model);
         $slug = $this->generateUniqueSlug($data['name'], $model);
-        
+
         $model::create([
             'field_name' => $data['name'],
             'field_type' => $data['type'],
@@ -126,7 +127,7 @@ class ModelFormBuilder extends Component
         $this->fieldSettings
             ->where('order', '>', $oldPosition)
             ->where('id', '!=', $setting->id)
-            ->each(fn ($fieldSetting) => $fieldSetting->update(['order' => $fieldSetting->order - 1]));
+            ->each(fn($fieldSetting) => $fieldSetting->update(['order' => $fieldSetting->order - 1]));
     }
 
     public function saveSettings(array $data): void
@@ -145,6 +146,8 @@ class ModelFormBuilder extends Component
         // Errors an Alpine mit Event senden
         // In Alpine auf Errors hören
         // Validierte Daten an Action geben
+        $action = new CreateLabelGroup();
+        $action->handle($formData);
         // LabelGroup speichern
     }
 
