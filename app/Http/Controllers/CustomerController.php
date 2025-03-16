@@ -23,10 +23,22 @@ class CustomerController extends Controller
 
     public function create(): View
     {
+        $fields = CustomerFieldSetting::where('active', true)->get();
+
+        $labelGroups = CustomerFieldSetting::where('active', true)->where('field_type', 'label')->get('slug')->pluck('slug')->toArray();
+
+        $labels = LabelGroup::whereIn('slug', $labelGroups)
+            ->where(function ($query) {
+                $query->where('model_type', 'customer')
+                    ->orWhere('model_type', 'all');
+            })
+            ->get();
+
+
         return view('customer.create', [
-            'fields' => CustomerFieldSetting::where('active', true)->get(),
+            'fields' => $fields,
             'formTemplate' => FormTemplate::where('model', 'CUSTOMER')->first(),
-            'labelGroups' => LabelGroup::where('model_type', 'customer')->orWhere('model_type', 'all')->get(),
+            'labelGroups' => $labels,
         ]);
     }
 
