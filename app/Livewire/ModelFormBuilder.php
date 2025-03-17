@@ -21,6 +21,8 @@ class ModelFormBuilder extends Component
     public string $form = '';
     public Collection $fieldSettings;
 
+    public LabelGroup|string $selectedGroup = '';
+
     public function mount(): void
     {
         $this->fieldTypes = FieldTypes::getFieldTypes();
@@ -174,6 +176,23 @@ class ModelFormBuilder extends Component
         ]);
     }
 
+    public function selectGroup(int $id): void
+    {
+        if ($id) {
+            $this->selectedGroup = LabelGroup::find($id);
+        }
+    }
+
+    public function removeLabelFromGroup(int $id): void
+    {
+        dd($id);
+    }
+
+    public function deleteLabelGroup(LabelGroup $group): void
+    {
+        dd($group);
+    }
+
     /**
      * @return View
      */
@@ -189,12 +208,15 @@ class ModelFormBuilder extends Component
      */
     public function render(): View
     {
-        $labelGroups = LabelGroup::where('model_type', $this->model)
+        $selectedGroups = LabelGroup::where('model_type', $this->model)
             ->orWhere('model_type', 'all')
             ->get();
 
+        $allLabelGroups = LabelGroup::all();
+
         return view('livewire.model-form-builder', [
-            'labelGroups' => $labelGroups,
+            'labelGroups' => $selectedGroups,
+            'allLabelGroups' => $allLabelGroups,
         ])->layout('layouts.app');
     }
 }
