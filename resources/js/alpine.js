@@ -66,7 +66,7 @@ Alpine.data('labelGenerator', ($wire) => ({
             options: this.options
         });
     },
-    
+
     validate() {
         if (this.groupname.trim() === '' || this.model.trim() === '') {
             this.valid = false;
