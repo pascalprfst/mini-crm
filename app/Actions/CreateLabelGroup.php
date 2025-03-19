@@ -21,7 +21,7 @@ class CreateLabelGroup
         $options = [];
 
         foreach ($data['options'] as $option) {
-            $options[] = $option['value'];
+            $options[Str::random(6)] = $option['value'];
         }
 
         $labelGroup = LabelGroup::create([
