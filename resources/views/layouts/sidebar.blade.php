@@ -39,12 +39,12 @@
 
             <x-sidebar-link icon="fa-solid fa-database" label="Import & Export"
                             href="{{route('dashboard')}}">
-                <a href="{{route('customers.index')}}"
+                <a href="{{route('import')}}"
                    class="flex items-center cursor-pointer hover:bg-gray-200 px-2 h-8 rounded-sm mb">
                     <span
                         class="font-medium text-slate-800 text-base relative whitespace-nowrap">Import</span>
                 </a>
-                <a href="{{route('customers.create')}}"
+                <a href="{{route('export')}}"
                    class="flex items-center cursor-pointer hover:bg-gray-200 px-2 h-8 rounded-sm mb">
                     <span
                         class="font-medium text-slate-800 text-base relative whitespace-nowrap">Export</span>

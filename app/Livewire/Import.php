@@ -42,6 +42,6 @@ class Import extends Component
 
     public function render(): View
     {
-        return view('livewire.import');
+        return view('livewire.import')->layout('layouts.app');
     }
 }

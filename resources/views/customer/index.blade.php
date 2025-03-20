@@ -5,6 +5,7 @@
         </div>
         <div class="relative mb-4">
             <table class="w-full text-sm text-left">
+
                 <thead class="text-sm bg-black text-white">
                 <tr>
                     @foreach($fields as $field)

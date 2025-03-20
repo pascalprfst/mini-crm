@@ -49,7 +49,6 @@ class Export extends Component
 
     public function render(): View
     {
-        return view('livewire.export', [
-        ]);
+        return view('livewire.export')->layout('layouts.app');
     }
 }
