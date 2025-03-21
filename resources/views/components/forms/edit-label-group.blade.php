@@ -10,7 +10,7 @@
 
     @if($selectedGroup)
         <form x-data="editLabelGroup($wire)" class="mt-4">
-            <x-input label="Name" name="new-name" id="new-name" value="{{$selectedGroup->name}}"/>
+            <x-input label="Name" name="newName" id="newName" x-model="newName" value="{{$selectedGroup->name}}"/>
 
             <h5 class="text-slate-800 text-base my-2">Optionen</h5>
 

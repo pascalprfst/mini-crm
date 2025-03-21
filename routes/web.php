@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Calendar;
 use App\Livewire\CustomerList;
 use App\Livewire\Export;
 use App\Livewire\Import;
@@ -29,6 +30,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/contacts', [ContactController::class, 'create'])->name('contacts.create');
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
+
+    Route::get('/calendar', Calendar::class)->name('calendar');
 
     Route::get('/form-builder', ModelFormBuilder::class)->name('form-builder');
     Route::get('/table-builder', TableBuilder::class)->name('table-builder');

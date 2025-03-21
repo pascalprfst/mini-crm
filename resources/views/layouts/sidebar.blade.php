@@ -34,7 +34,8 @@
                 </a>
             </x-sidebar-link>
 
-            <x-sidebar-link icon="fa-solid fa-calendar-days" label="Kalender" href="#"></x-sidebar-link>
+            <x-sidebar-link icon="fa-solid fa-calendar-days" label="Kalender"
+                            href="{{route('calendar')}}"></x-sidebar-link>
 
 
             <x-sidebar-link icon="fa-solid fa-database" label="Import & Export"
