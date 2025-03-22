@@ -50,7 +50,7 @@
                     <span
                         class="font-medium text-slate-800 text-base relative whitespace-nowrap">Export</span>
                 </a>
-                <a href="{{route('customers.create')}}"
+                <a href="{{route('imports-exports.index')}}"
                    class="flex items-center cursor-pointer hover:bg-gray-200 px-2 h-8 rounded-sm mb">
                     <span
                         class="font-medium text-slate-800 text-base relative whitespace-nowrap">Meine Importe & Exporte</span>

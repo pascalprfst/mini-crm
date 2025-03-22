@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ImportExportController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Calendar;
 use App\Livewire\CustomerList;
@@ -20,11 +21,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
-    Route::get('import-export', function () {
-        return view('import-export');
-    })->name('import-export');
-
     Route::get('/customers', CustomerList::class)->name('customers.index');
     Route::resource('customers', CustomerController::class)->only('show', 'create', 'store');
 
@@ -36,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/form-builder', ModelFormBuilder::class)->name('form-builder');
     Route::get('/table-builder', TableBuilder::class)->name('table-builder');
 
+    Route::get('/imports-exports', [ImportExportController::class, 'index'])->name('imports-exports.index');
     Route::get('/import', Import::class)->name('import');
     Route::get('/export', Export::class)->name('export');
 
