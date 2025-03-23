@@ -9,8 +9,9 @@
     </x-select>
 
     @if($selectedGroup)
-        <form x-data="editLabelGroup($wire)" class="mt-4">
-            <x-input label="Name" name="newName" id="newName" x-model="newName" value="{{$selectedGroup->name}}"/>
+        <form x-data="editLabelGroup($wire, '{{$selectedGroup->name}}', {{$selectedGroup->id}})" @submit.prevent="edit"
+              class="mt-4">
+            <x-input label="Name" name="newName" id="newName" x-model="newName"/>
 
             <h5 class="text-slate-800 text-base my-2">Optionen</h5>
 
@@ -32,12 +33,20 @@
                 <i class="fa-solid fa-plus text-slate-800 font-semibold"></i>
                 <span>Option hinzufügen</span>
             </x-sub-button>
+
+            <x-primary-button>Speichern</x-primary-button>
         </form>
     @endif
 </div>
 
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('editLabelGroup', ($wire) => ({}));
+        Alpine.data('editLabelGroup', ($wire, name, id) => ({
+            newName: name,
+            groupId: id,
+            edit() {
+                this.$wire.editGroup({name: this.newName}, this.groupId)
+            }
+        }));
     });
 </script>

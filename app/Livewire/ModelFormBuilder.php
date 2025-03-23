@@ -183,6 +183,14 @@ class ModelFormBuilder extends Component
         }
     }
 
+    public function editGroup(array $data, LabelGroup $group): void
+    {
+        if (isset($data['name'])) {
+            $group->name = $data['name'];
+            $group->save();
+        }
+    }
+
     public function removeLabelFromGroup(int $id): void
     {
         dd($id);
