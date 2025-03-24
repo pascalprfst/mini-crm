@@ -16,10 +16,10 @@
             <h5 class="text-slate-800 text-base my-2">Optionen</h5>
 
             <ul>
-                @foreach($selectedGroup->values as $value)
+                @foreach($selectedGroup->values as $key =>$value)
                     <li class="px-2.5 py-1 border text-base text-slate-800 border-slate-300 rounded-md bg-slate-100 mb-2 flex justify-between items-center">
                         {{$value}}
-                        <i wire:click="removeLabelFromGroup(1)"
+                        <i wire:click="removeLabelFromGroup('{{$key}}', {{$selectedGroup->id}})"
                            class="fa-solid fa-circle-xmark text-lg text-red-600 hover:text-red-500 ml-2 cursor-pointer"></i>
                     </li>
                 @endforeach

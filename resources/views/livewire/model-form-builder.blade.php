@@ -8,7 +8,7 @@
     </div>
 
     <div class="flex flex-col xl:flex-row gap-8">
-        <x-section class="w-full max-h-max" heading="Formular & Objekt Builder">
+        <x-section class="w-full max-h-max pb-8" heading="Formular & Objekt Builder">
             <div>
                 <h4 class="font-medium text-slate-800 text-base mb-2">Formular</h4>
 
@@ -111,10 +111,18 @@
                         @if(count($labelGroups) > 0)
                             <div class="flex flex-wrap gap-2.5">
                                 @foreach($labelGroups as $group)
-                                    <div
-                                        wire:click="toggleLabelGroup({{$group->id}})"
-                                        class="border border-slate-300 text-base rounded-md py-0.5 px-2.5 cursor-pointer">
-                                        {{$group->name}}
+                                    <div class="relative group">
+                                        <div
+                                            wire:click="toggleLabelGroup({{$group->id}})"
+                                            class=" border border-slate-300 text-base rounded-md py-0.5 px-2.5 cursor-pointer">
+                                            {{$group->name}}
+                                        </div>
+                                        <div
+                                            class="hidden group-hover:flex text-sm px-2 py-0.5 left-0 -bottom-8 rounded-sm shadow-sm bg-yellow-200 absolute  flex-wrap justify-center gap-2 z-20 w-52">
+                                            @foreach($group->values as $id => $value)
+                                                <span>{{$value}}</span>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>

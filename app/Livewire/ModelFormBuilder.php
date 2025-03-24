@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 
 class ModelFormBuilder extends Component
 {
@@ -187,13 +188,15 @@ class ModelFormBuilder extends Component
     {
         if (isset($data['name'])) {
             $group->name = $data['name'];
-            $group->save();
         }
+        $group->save();
     }
 
-    public function removeLabelFromGroup(int $id): void
+    public function removeLabelFromGroup(string $id, LabelGroup $group): void
     {
-        dd($id);
+        $group->update([
+            'values' => DB::raw("\"values\" - '{$id}'")
+        ]);
     }
 
     public function deleteLabelGroup(LabelGroup $group): void
